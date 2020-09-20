@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from 'react';
 import { AnimeModel, Status, Score } from '../models';
+import AnimeModalItem from './AnimeModalItem';
+import { Image, Button, ListGroupItem } from 'react-bootstrap';
 
 type Props = {
   onChange: (value: string | undefined | null | Status | Score, propname: string) => void;
@@ -12,140 +14,52 @@ const AnimeListItem: React.FC<Props> = ({
   id,
   image,
   name_english,
-  name_japanese,
-  type,
-  score,
-  status,
-  comments}) => {
+  comments,
+  ...rest}) => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
-      <li className='list-group-item'>
-        <form>
-          <button
-            className='close'
-            onClick={onDelete}
-            title='Delete this anime'
-            type='button'
-          >
-            <span>&times;</span>
-          </button>
-
-          {image && (
-            <img
-              src={image}
-              alt={id}
-              className='img-thumbnail rounded mx-auto d-block mb-2'
-            />
-          )}
-
-          <div className='form-group row'>
-            <label
-              htmlFor={id + '-name_english'}
-              className='col-sm-2 col-form-label'
-            >
-              English Name
-            </label>
-            <div className='col-sm-10'>
-              <input
-                value={name_english}
-                className='form-control'
-                id={id + '-name_english'}
-                onChange={(e) => onChange(e.target.value, 'name_english')}
-                type='text'
-              />
+      <ListGroupItem key={id}>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-md-auto'>
+              {image && <Image src={image} alt={id + '-image'} rounded />}
             </div>
-          </div>
 
-          <div className='form-group row'>
-            <label
-              htmlFor={id + '-name_japanese'}
-              className='col-sm-2 col-form-label'
-            >
-              Japanese Name
-            </label>
-            <div className='col-sm-10'>
-              <input
-                value={name_japanese}
-                className='form-control'
-                id={id + '-name_japanese'}
-                onChange={(e) => onChange(e.target.value, 'name_japanese')}
-                type='text'
-              />
-            </div>
-          </div>
+            <div className='col'>
+              <h5 className='text-uppercase mb-3'>{name_english}</h5>
 
-          <div className='form-group row'>
-            <label htmlFor={id + '-status'} className='col-sm-2 col-form-label'>
-              Status
-            </label>
-            <div className='col-sm-10'>
-              <select
-                className='custom-select'
-                defaultValue={status}
-                id={id + '-status'}
-                onChange={(e) => onChange(e.target.value, 'status')}
-              >
-                {Object.keys(Status).map((stat: keyof typeof Status) => (
-                  <option key={stat} value={stat}>
-                    {Status[stat]}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className='form-group row'>
-            <label htmlFor={id + '-score'} className='col-sm-2 col-form-label'>
-              Score
-            </label>
-            <div className='col-sm-10'>
-              <select
-                className='custom-select'
-                defaultValue={score}
-                id={id + '-score'}
-                onChange={(e) => onChange(e.target.value, 'score')}
-              >
-                {Object.keys(Score).map((sc: keyof typeof Score) => (
-                  <option key={sc} value={sc}>
-                    {Score[sc]}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className='form-group row'>
-            <label htmlFor={id + '-type'} className='col-sm-2 col-form-label'>
-              Type
-            </label>
-            <div className='col-sm-10'>
-              <input
-                value={type}
-                className='form-control'
-                id={id + '-type'}
-                onChange={(e) => onChange(e.target.value, 'type')}
-                type='text'
-              />
-            </div>
-          </div>
-
-          <div className='form-group row'>
-            <label
-              htmlFor={id + '-comments'}
-              className='col-sm-2 col-form-label'
-            >
-              Comments
-            </label>
-            <div className='col-sm-10'>
+              <label htmlFor={id + '-comments'} className='float-left'>
+                My Comments:
+              </label>
               <textarea
                 value={comments}
                 id={id + '-comments'}
-                className='form-control'
+                className='form-control h-50 mb-3'
                 onChange={(e) => onChange(e.target.value, 'comments')}
               />
+
+              <Button variant='primary' onClick={handleShow} title='View more information about this item'>View more</Button>
+              {' '}
+              <Button variant='danger' onClick={onDelete} title='Delete this anime'>Delete</Button>
             </div>
           </div>
-        </form>
-      </li>
+        </div>
+
+        <AnimeModalItem
+          show={show}
+          handleClose={handleClose}
+          onDelete={onDelete}
+          onChange={onChange}
+          id={id}
+          image={image}
+          name_english={name_english}
+          comments={comments}
+          {...rest}
+        />
+      </ListGroupItem>
     );
 };
 

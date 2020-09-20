@@ -6,7 +6,7 @@ type Props = {
 };
 
 const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
-  const [name_japanese, setNameJapanese] = useState('');
+  const [name_english, setNameEnglish] = useState('');
   const [image, setImage] = useState("");
   const [score, setScore] = useState(Score.Average);
 
@@ -15,26 +15,26 @@ const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
 
     if (!image.endsWith("jpg") && !image.endsWith("png")) return;
 
-    onSubmit({ name_japanese, image, score });
-    setNameJapanese('');
+    onSubmit({ name_english, image, score });
+    setNameEnglish('');
     setImage("");
     setScore(Score.Average);
   };
 
   return (
     <form autoComplete='off' className='form-inline' onSubmit={handleSubmit}>
-      <label className='sr-only' htmlFor='name_japanese'>
+      <label className='sr-only' htmlFor='name_english'>
         New Anime
       </label>
 
       <input
         className='form-control mr-sm-2 flex-grow-1'
-        id='name_japanese'
-        onChange={(e) => setNameJapanese(e.target.value)}
-        placeholder='Type in the title of your new anime'
+        id='name_english'
+        onChange={(e) => setNameEnglish(e.target.value)}
+        placeholder='Type in the English title of your new anime'
         required
         type='text'
-        value={name_japanese}
+        value={name_english}
       />
 
       <input

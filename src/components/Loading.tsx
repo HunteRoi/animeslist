@@ -1,10 +1,11 @@
 import React from 'react';
+import { Spinner } from 'react-bootstrap';
 
 const Loading: React.FC = () => {
   return (
-    <div className='spinner-border text-primary'>
+    <Spinner animation='border' variant='primary' role='status'>
       <span className='sr-only'>Loading...</span>
-    </div>
+    </Spinner>
   );
 };
 

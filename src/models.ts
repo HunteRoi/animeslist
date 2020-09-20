@@ -1,6 +1,6 @@
 
 export type Anime = {
-  name_japanese?: string;
+  name_english?: string;
   image?: string;
   score?: Score;
 };
