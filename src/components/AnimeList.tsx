@@ -9,7 +9,7 @@ type Props = {
 };
 
 const AnimeList: React.FC<Props> = ({ animes }) => {
-  const sorted = useMemo(() => sortBy(animes, anime => anime.score), [animes]);
+  const sorted = useMemo(() => sortBy(animes, anime => anime.id), [animes]);
 
   return (
     <ul className="list-group list-group-flush">
