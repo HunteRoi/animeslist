@@ -16,11 +16,11 @@ type Props = {
 const AnimeList: React.FC<Props> = ({ animes }) => {
   const [filter, setFilter] = useState("");
   const sorted = useMemo(() => {
-    let array = sortBy(animes, anime => anime.id);
+    let array = sortBy(animes, anime => anime.name_english);
     if (filter) {
       array = array.filter(
         (anime) =>
-          anime.name_english && anime.name_english.toLowerCase().includes(filter.toLowerCase())
+          (anime.name_english && anime.name_english.toLowerCase().includes(filter.toLowerCase()))
           || (anime.name_japanese && anime.name_japanese.toLowerCase().includes(filter.toLowerCase()))
           || (anime.types && anime.types.some(t => t.toLowerCase().includes(filter.toLowerCase())))
           || (anime.comments && anime.comments.toLowerCase().includes(filter.toLowerCase()))

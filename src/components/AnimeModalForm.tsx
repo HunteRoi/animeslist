@@ -45,6 +45,7 @@ const AnimeModalForm: React.FC<Props> = ({
             id={id + '-name_english'}
             onChange={(e) => onChange(e.target.value, 'name_english')}
             type='text'
+            required
           />
         </div>
       </div>
