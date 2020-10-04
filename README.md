@@ -21,4 +21,3 @@ export default firebase;
 
 ## To Do
 - finish refactoring with react-bootstrap
-- handle types as tags with https://www.npmjs.com/package/react-tag-input

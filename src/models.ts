@@ -10,7 +10,7 @@ export type AnimeModel = {
   image: string;
   name_english?: string;
   name_japanese?: string;
-  type?: string;
+  types?: string[];
   score?: Score;
   status?: Status;
   comments?: string;

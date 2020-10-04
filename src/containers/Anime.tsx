@@ -20,7 +20,7 @@ const Anime: React.FC<Props> = ({ component, id, ...rest }) => {
     [id]
   );
   const onChange = (
-    value: string | undefined | null | Status | Score,
+    value: string | undefined | null | Status | Score | string[],
     propname: string
   ) => {
     docRef.update({ [propname]: value });

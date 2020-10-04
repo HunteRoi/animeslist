@@ -1,9 +1,11 @@
+import ReactTagInput from '@pathofdev/react-tag-input';
 import React from 'react';
 import { AnimeModel, Score, Status } from '../models';
+import './AnimeModalForm.css';
 
 type Props = {
   onChange: (
-    value: string | undefined | null | Status | Score,
+    value: string | undefined | null | Status | Score | string[],
     propname: string
   ) => void;
 } & AnimeModel;
@@ -14,7 +16,7 @@ const AnimeModalForm: React.FC<Props> = ({
   image,
   name_english,
   name_japanese,
-  type,
+  types,
   score,
   status,
   comments,
@@ -110,12 +112,11 @@ const AnimeModalForm: React.FC<Props> = ({
           Type
         </label>
         <div className='col-sm-10'>
-          <input
-            value={type}
-            className='form-control'
-            id={id + '-type'}
-            onChange={(e) => onChange(e.target.value, 'type')}
-            type='text'
+          <ReactTagInput
+            tags={types}
+            placeholder={' '}
+            onChange={newTypes => onChange(newTypes, 'types')}
+            removeOnBackspace={true}
           />
         </div>
       </div>

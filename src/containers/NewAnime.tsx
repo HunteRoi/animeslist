@@ -10,6 +10,7 @@ const NewAnime: React.FC = () => {
       .collection("animes")
       .add({
         status: "PlanToWatch",
+        types: [],
         ...anime
       });
   };
