@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from "react";
+import { Button, Form } from 'react-bootstrap';
 import { Anime, Score } from '../models';
 
 type Props = {
@@ -17,40 +18,39 @@ const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
 
     onSubmit({ name_english, image, score });
     setNameEnglish('');
-    setImage("");
+    setImage('');
     setScore(Score.Average);
   };
 
   return (
-    <form autoComplete='off' className='form-inline' onSubmit={handleSubmit}>
-      <label className='sr-only' htmlFor='name_english'>
-        New Anime
-      </label>
-
-      <input
-        className='form-control mr-sm-2 flex-grow-1'
+    <Form inline autoComplete='off' onSubmit={handleSubmit}>
+      <Form.Label srOnly htmlFor='name_english'>New Anime</Form.Label>
+      <Form.Control
+        className='flex-grow-1 mb-2 mr-sm-2'
         id='name_english'
-        onChange={(e) => setNameEnglish(e.target.value)}
-        placeholder='Type in the English title of your new anime'
-        required
         type='text'
+        required
         value={name_english}
+        onChange={(e) => setNameEnglish(e.currentTarget.value)}
+        placeholder='Type the English title of your anime'
       />
 
-      <input
-        className='form-control mr-sm-2 flex-grow-1'
+      <Form.Control
+        className='flex-grow-1 mb-2 mr-sm-2'
         id='image'
-        onChange={(e) => setImage(e.target.value)}
+        type='url'
+        onChange={(e) => setImage(e.currentTarget.value)}
+        value={image}
         placeholder='https://image.com/image.jpg'
         required
-        type='url'
-        value={image}
       />
 
-      <select
-        className='custom-select mr-sm-2'
-        defaultValue={score}
+      <Form.Control
+        className='flex-grow-1 mb-2 mr-sm-2'
         id='score'
+        as='select'
+        custom
+        defaultValue={score}
         onChange={(e) => setScore(e.target.value as Score)}
       >
         {Object.keys(Score).map((sc: keyof typeof Score) => (
@@ -58,12 +58,12 @@ const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
             {Score[sc]}
           </option>
         ))}
-      </select>
+      </Form.Control>
 
-      <button className='btn btn-primary ml-2' title='Add anime' type='submit'>
+      <Button type='submit' className='mb-2'>
         Add anime
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };
 

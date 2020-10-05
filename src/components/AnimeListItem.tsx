@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import { AnimeModel, Status, Score } from '../models';
 import AnimeModalItem from './AnimeModalItem';
-import { Image, Button, ListGroupItem } from 'react-bootstrap';
+import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure } from 'react-bootstrap';
 
 type Props = {
   onChange: (value: string | undefined | null | Status | Score, propname: string) => void;
@@ -15,6 +15,8 @@ const AnimeListItem: React.FC<Props> = ({
   image,
   name_english,
   comments,
+  types,
+  score,
   ...rest}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -22,31 +24,36 @@ const AnimeListItem: React.FC<Props> = ({
 
     return (
       <ListGroupItem key={id}>
-        <div className='container-fluid'>
-          <div className='row'>
-            <div className='col-md-auto'>
-              {image && <Image src={image} alt={id + '-image'} rounded />}
-            </div>
+        <Container fluid>
+          <Row>
+            <Col md='auto'>
+              <Figure>
+                {image && <Figure.Image src={image} alt={id + '-image'} rounded />}
+                <Figure.Caption>
+                  {types.map(t => <Badge pill variant='dark' className='ml-1' key={t}>{t}</Badge>)}
+                </Figure.Caption>
+              </Figure>
+            </Col>
 
-            <div className='col'>
-              <h5 className='text-uppercase mb-3'>{name_english}</h5>
+            <Col>
+              <h5 className='text-uppercase'>{name_english}</h5>
+              <Form.Text className='mb-3'>Score: {Score[score as keyof typeof Score]}</Form.Text>
 
-              <label htmlFor={id + '-comments'} className='float-left'>
-                My Comments:
-              </label>
-              <textarea
-                value={comments}
-                id={id + '-comments'}
-                className='form-control h-50 mb-3'
-                onChange={(e) => onChange(e.target.value, 'comments')}
-              />
+              <Form.Group controlId={id + '-comments'}>
+                <Form.Label className='float-left'>Comments</Form.Label>
+                <Form.Control
+                  as='textarea'
+                  value={comments}
+                  onChange={(e) => onChange(e.currentTarget.value, 'comments')}
+                />
+              </Form.Group>
 
               <Button variant='primary' onClick={handleShow} title='View more information about this item'>View more</Button>
               {' '}
               <Button variant='danger' onClick={onDelete} title='Delete this anime'>Delete</Button>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
 
         <AnimeModalItem
           show={show}
@@ -57,6 +64,8 @@ const AnimeListItem: React.FC<Props> = ({
           image={image}
           name_english={name_english}
           comments={comments}
+          types={types}
+          score={score}
           {...rest}
         />
       </ListGroupItem>

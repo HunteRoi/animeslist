@@ -17,7 +17,3 @@ firebase.initializeApp(firebaseConfig);
 export default firebase;
 ```
 6) Run with `npm start` and enjoy!
-
-
-## To Do
-- finish refactoring with react-bootstrap

@@ -1,5 +1,6 @@
 import ReactTagInput from '@pathofdev/react-tag-input';
 import React from 'react';
+import { Col, Form, Row, Image } from 'react-bootstrap';
 import { AnimeModel, Score, Status } from '../models';
 import './AnimeModalForm.css';
 
@@ -21,122 +22,94 @@ const AnimeModalForm: React.FC<Props> = ({
   status,
   comments,
 }) => {
-  return (
-    <form>
-      {image && (
-        <img
-          src={image}
-          alt={id}
-          className='img-thumbnail rounded mx-auto d-block mb-2'
+  return (<Form>
+    {image && (
+      <Image
+        src={image}
+        alt={id}
+        className='img-thumbnail rounded mx-auto d-block mb-2'
+      />
+    )}
+
+    <Form.Group as={Row} controlId={id + '-name_english'}>
+      <Form.Label column sm={2}>English Name</Form.Label>
+      <Col sm={10}>
+        <Form.Control
+          value={name_english}
+          type='text'
+          required
+          onChange={(e) => onChange(e.currentTarget.value, 'name_english')}
         />
-      )}
+      </Col>
+    </Form.Group>
 
-      <div className='form-group row'>
-        <label
-          htmlFor={id + '-name_english'}
-          className='col-sm-2 col-form-label'
+    <Form.Group as={Row} controlId={id + '-name_japanese'}>
+      <Form.Label column sm={2}>Japanese Name</Form.Label>
+      <Col sm={10}>
+        <Form.Control
+          value={name_japanese}
+          type='text'
+          required
+          onChange={(e) => onChange(e.currentTarget.value, 'name_japanese')}
+        />
+      </Col>
+    </Form.Group>
+
+    <Form.Group as={Row} controlId={id + '-status'}>
+      <Form.Label column sm={2}>Status</Form.Label>
+      <Col sm={10}>
+        <Form.Control 
+          as='select' custom
+          defaultValue={status}
+          onChange={(e) => onChange(e.target.value, 'status')}
         >
-          English Name
-        </label>
-        <div className='col-sm-10'>
-          <input
-            value={name_english}
-            className='form-control'
-            id={id + '-name_english'}
-            onChange={(e) => onChange(e.target.value, 'name_english')}
-            type='text'
-            required
-          />
-        </div>
-      </div>
+          {Object.keys(Status).map((stat: keyof typeof Status) => (
+            <option key={stat} value={stat}>{Status[stat]}</option>
+          ))}
+        </Form.Control>
+      </Col>
+    </Form.Group>
 
-      <div className='form-group row'>
-        <label
-          htmlFor={id + '-name_japanese'}
-          className='col-sm-2 col-form-label'
+    <Form.Group as={Row} controlId={id + '-score'}>
+      <Form.Label column sm={2}>Score</Form.Label>
+      <Col sm={10}>
+        <Form.Control 
+          as='select' custom
+          defaultValue={score}
+          onChange={(e) => onChange(e.target.value, 'score')}
         >
-          Japanese Name
-        </label>
-        <div className='col-sm-10'>
-          <input
-            value={name_japanese}
-            className='form-control'
-            id={id + '-name_japanese'}
-            onChange={(e) => onChange(e.target.value, 'name_japanese')}
-            type='text'
-          />
-        </div>
-      </div>
+          {Object.keys(Score).map((sc: keyof typeof Score) => (
+            <option key={sc} value={sc}>{Score[sc]}</option>
+          ))}
+        </Form.Control>
+      </Col>
+    </Form.Group>
 
-      <div className='form-group row'>
-        <label htmlFor={id + '-status'} className='col-sm-2 col-form-label'>
-          Status
-        </label>
-        <div className='col-sm-10'>
-          <select
-            className='custom-select'
-            defaultValue={status}
-            id={id + '-status'}
-            onChange={(e) => onChange(e.target.value, 'status')}
-          >
-            {Object.keys(Status).map((stat: keyof typeof Status) => (
-              <option key={stat} value={stat}>
-                {Status[stat]}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+    <Form.Group as={Row} controlId={id + '-types'}>
+      <Form.Label column sm={2}>Types</Form.Label>
+      <Col sm={10}>
+        <ReactTagInput
+          tags={types}
+          placeholder={' '}
+          onChange={(newTypes) => onChange(newTypes, 'types')}
+          removeOnBackspace={true}
+        />
+      </Col>
+    </Form.Group>
 
-      <div className='form-group row'>
-        <label htmlFor={id + '-score'} className='col-sm-2 col-form-label'>
-          Score
-        </label>
-        <div className='col-sm-10'>
-          <select
-            className='custom-select'
-            defaultValue={score}
-            id={id + '-score'}
-            onChange={(e) => onChange(e.target.value, 'score')}
-          >
-            {Object.keys(Score).map((sc: keyof typeof Score) => (
-              <option key={sc} value={sc}>
-                {Score[sc]}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className='form-group row'>
-        <label htmlFor={id + '-type'} className='col-sm-2 col-form-label'>
-          Type
-        </label>
-        <div className='col-sm-10'>
-          <ReactTagInput
-            tags={types}
-            placeholder={' '}
-            onChange={newTypes => onChange(newTypes, 'types')}
-            removeOnBackspace={true}
-          />
-        </div>
-      </div>
-
-      <div className='form-group row'>
-        <label htmlFor={id + '-comments'} className='col-sm-2 col-form-label'>
-          Comments
-        </label>
-        <div className='col-sm-10'>
-          <textarea
-            value={comments}
-            id={id + '-comments'}
-            className='form-control'
-            onChange={(e) => onChange(e.target.value, 'comments')}
-          />
-        </div>
-      </div>
-    </form>
-  );
+    <Form.Group as={Row} controlId={id + '-comments'}>
+      <Form.Label column sm={2}>Comments</Form.Label>
+      <Col sm={10}>
+        <Form.Control
+          as='textarea'
+          value={comments}
+          type='text'
+          required
+          onChange={(e) => onChange(e.currentTarget.value, 'comments')}
+        />
+      </Col>
+    </Form.Group>
+  </Form>);
 };
 
 export default AnimeModalForm;
