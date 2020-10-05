@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@forevolve/bootstrap-dark": "^1.0.0-alpha.1091",
     "@pathofdev/react-tag-input": "^1.0.7",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
