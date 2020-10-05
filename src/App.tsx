@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Animes from './containers/Animes';
 import AnimeList from './components/AnimeList';
 import NewAnime from './containers/NewAnime';
@@ -29,6 +29,6 @@ const App: React.FC = () => {
       <footer className='footer text-center mb-3'>&copy; HunteRoi 2020.</footer>
     </Container>
   );
-};;
+};
 
 export default App;
