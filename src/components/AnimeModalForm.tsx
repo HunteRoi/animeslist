@@ -1,6 +1,6 @@
 import ReactTagInput from '@pathofdev/react-tag-input';
 import React from 'react';
-import { Col, Form, Row, Image } from 'react-bootstrap';
+import { Col, Form, Row, Figure } from 'react-bootstrap';
 import { AnimeModel, Score, Status } from '../models';
 import './AnimeModalForm.css';
 
@@ -23,14 +23,8 @@ const AnimeModalForm: React.FC<Props> = ({
   comments,
 }) => {
   return (<Form>
-    {image && (
-      <Image
-        src={image}
-        alt={id}
-        className='img-thumbnail rounded mx-auto d-block mb-2'
-      />
-    )}
-
+    {image && <Figure.Image src={image} alt={id} rounded className="mx-auto d-block mb-3"/>}
+    
     <Form.Group as={Row} controlId={id + '-name_english'}>
       <Form.Label column sm={2}>English Name</Form.Label>
       <Col sm={10}>
