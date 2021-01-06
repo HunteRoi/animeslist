@@ -1,7 +1,10 @@
 import React, { useState, } from 'react';
+import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure, NavLink } from 'react-bootstrap';
+
 import { AnimeModel, Status, Score } from '../models';
 import AnimeModalItem from './AnimeModalItem';
-import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure, NavLink } from 'react-bootstrap';
+import Image from './Image';
+import './AnimeListItem.css';
 
 type Props = {
   onChange: (value: string | undefined | null | Status | Score, propname: string) => void;
@@ -14,9 +17,11 @@ const AnimeListItem: React.FC<Props> = ({
   id,
   image,
   name_english,
+  name_japanese,
   comments,
   types,
   score,
+  status,
   ...rest}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -30,15 +35,13 @@ const AnimeListItem: React.FC<Props> = ({
               <Figure>
                 {image && (
                   <NavLink onClick={handleShow}>
-                    <Figure.Image src={image} alt={id + '-image'} rounded />
+                    <Image src={image} alt={id + '-image'} rounded>
+                      {status}
+                    </Image>
                   </NavLink>
                 )}
                 <Figure.Caption>
-                  {types.map((t) => (
-                    <Badge pill variant='dark' className='ml-1' key={t}>
-                      {t}
-                    </Badge>
-                  ))}
+                  Score: {Score[score as keyof typeof Score]}
                 </Figure.Caption>
               </Figure>
             </Col>
@@ -47,8 +50,15 @@ const AnimeListItem: React.FC<Props> = ({
               <NavLink onClick={handleShow}>
                 <h5 className='text-uppercase'>{name_english}</h5>
               </NavLink>
+              <Form.Text>
+                <h6 className="subtitle">{name_japanese}</h6>
+              </Form.Text>
               <Form.Text className='mb-3'>
-                Score: {Score[score as keyof typeof Score]}
+                {types.map((t) => (
+                  <Badge pill variant='dark' className='ml-1' key={t}>
+                    {t}
+                  </Badge>
+                ))}
               </Form.Text>
               <Form.Group controlId={id + '-comments'}>
                 <Form.Label className='float-left'>Comments</Form.Label>
@@ -84,9 +94,11 @@ const AnimeListItem: React.FC<Props> = ({
           id={id}
           image={image}
           name_english={name_english}
+          name_japanese={name_japanese}
           comments={comments}
           types={types}
           score={score}
+          status={status}
           {...rest}
         />
       </ListGroupItem>
