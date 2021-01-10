@@ -1,5 +1,5 @@
-import React, { useState, } from 'react';
-import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure, NavLink } from 'react-bootstrap';
+import React, { useState, useRef, useEffect } from 'react';
+import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure, NavLink, Overlay, Tooltip } from 'react-bootstrap';
 
 import { AnimeModel, Status, Score } from '../models';
 import AnimeModalItem from './AnimeModalItem';
@@ -22,10 +22,25 @@ const AnimeListItem: React.FC<Props> = ({
   types,
   score,
   status,
+  link,
   ...rest}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const target = useRef(null);
+    const [copySuccess, setCopySuccess] = useState(false);
+
+    const copyToClipboard = async () => {
+      console.log(link);
+      await navigator.clipboard.writeText(link ?? '');
+      setCopySuccess(true);
+    };
+
+    useEffect(() => {
+      if (copySuccess) {
+        setTimeout(() => setCopySuccess(false), 1250);
+      }
+    }, [copySuccess]);
 
     return (
       <ListGroupItem key={id}>
@@ -51,7 +66,7 @@ const AnimeListItem: React.FC<Props> = ({
                 <h5 className='text-uppercase'>{name_english}</h5>
               </NavLink>
               <Form.Text>
-                <h6 className="subtitle">{name_japanese}</h6>
+                <h6 className='subtitle'>{name_japanese}</h6>
               </Form.Text>
               <Form.Text className='mb-3'>
                 {types.map((t) => (
@@ -81,7 +96,20 @@ const AnimeListItem: React.FC<Props> = ({
                 title='Delete this anime'
               >
                 Delete
+              </Button>{' '}
+              <Button
+                variant='secondary'
+                onClick={copyToClipboard}
+                title='Copy the link to this anime and share it'
+                ref={target}
+              >
+                Share
               </Button>
+              <Overlay target={target.current} show={copySuccess} placement='right'>
+                {(props) => (
+                  <Tooltip id='copy-tooltip' {...props}>Copied!</Tooltip>
+                )}
+              </Overlay>
             </Col>
           </Row>
         </Container>
@@ -99,6 +127,7 @@ const AnimeListItem: React.FC<Props> = ({
           types={types}
           score={score}
           status={status}
+          link={link}
           {...rest}
         />
       </ListGroupItem>

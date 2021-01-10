@@ -21,6 +21,7 @@ const AnimeModalForm: React.FC<Props> = ({
   score,
   status,
   comments,
+  link,
 }) => {
   return (<Form>
     {image && <Figure.Image src={image} alt={id} rounded className="mx-auto d-block mb-3"/>}
@@ -76,6 +77,18 @@ const AnimeModalForm: React.FC<Props> = ({
             <option key={sc} value={sc}>{Score[sc]}</option>
           ))}
         </Form.Control>
+      </Col>
+    </Form.Group>
+
+    <Form.Group as={Row} controlId={id + '-link'}>
+      <Form.Label column sm={2}>Link</Form.Label>
+      <Col sm={10}>
+        <Form.Control
+          value={link}
+          type='url'
+          required
+          onChange={(e) => onChange(e.currentTarget.value, 'link')}
+        />
       </Col>
     </Form.Group>
 

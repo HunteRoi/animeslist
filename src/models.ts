@@ -14,6 +14,7 @@ export type AnimeModel = {
   score?: Score;
   status?: Status;
   comments?: string;
+  link?: string;
 };
 
 export enum Score {
