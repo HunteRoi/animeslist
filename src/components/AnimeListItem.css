@@ -2,3 +2,7 @@
   margin: auto;
   width: 90%;
 }
+
+.btn-item {
+  margin-top: 0.5em !important;
+}

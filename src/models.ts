@@ -3,6 +3,7 @@ export type Anime = {
   name_english?: string;
   image?: string;
   score?: Score;
+  link?: string;
 };
 
 export type AnimeModel = {

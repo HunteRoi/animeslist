@@ -31,8 +31,8 @@ const AnimeListItem: React.FC<Props> = ({
     const [copySuccess, setCopySuccess] = useState(false);
 
     const copyToClipboard = async () => {
-      console.log(link);
-      await navigator.clipboard.writeText(link ?? '');
+      const text = name_english ? `${name_english}\n${link ?? 'no link found'}` : '';
+      await navigator.clipboard.writeText(text);
       setCopySuccess(true);
     };
 
@@ -87,6 +87,7 @@ const AnimeListItem: React.FC<Props> = ({
                 variant='primary'
                 onClick={handleShow}
                 title='View more information about this item'
+                className='btn-item'
               >
                 View more
               </Button>{' '}
@@ -94,6 +95,7 @@ const AnimeListItem: React.FC<Props> = ({
                 variant='danger'
                 onClick={onDelete}
                 title='Delete this anime'
+                className='btn-item'
               >
                 Delete
               </Button>{' '}
@@ -102,6 +104,7 @@ const AnimeListItem: React.FC<Props> = ({
                 onClick={copyToClipboard}
                 title='Copy the link to this anime and share it'
                 ref={target}
+                className='btn-item'
               >
                 Share
               </Button>

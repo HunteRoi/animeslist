@@ -9,6 +9,7 @@ type Props = {
 const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
   const [name_english, setNameEnglish] = useState('');
   const [image, setImage] = useState("");
+  const [link, setLink] = useState("");
   const [score, setScore] = useState(Score.Average);
 
   const handleSubmit = (e: FormEvent) => {
@@ -16,9 +17,10 @@ const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
 
     if (!image.endsWith("jpg") && !image.endsWith("png")) return;
 
-    onSubmit({ name_english, image, score });
+    onSubmit({ name_english, image, score, link });
     setNameEnglish('');
     setImage('');
+    setLink('');
     setScore(Score.Average);
   };
 
@@ -42,6 +44,16 @@ const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
         onChange={(e) => setImage(e.currentTarget.value)}
         value={image}
         placeholder='https://image.com/image.jpg'
+        required
+      />
+
+      <Form.Control
+        className='flex-grow-1 mb-2 mr-sm-2'
+        id='link'
+        type='url'
+        onChange={(e) => setLink(e.currentTarget.value)}
+        value={link}
+        placeholder='https://anime.com/anime.html'
         required
       />
 
