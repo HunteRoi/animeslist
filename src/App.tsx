@@ -1,33 +1,64 @@
-import React from 'react';
-import Animes from './containers/Animes';
-import AnimeList from './components/AnimeList';
-import NewAnime from './containers/NewAnime';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap-dark.css';
 import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap.css';
-import { useDarkMode } from './hooks/useDarkMode';
-import Toggle from './components/Toggle';
+
+import { auth, signIn, signOut } from './firebase/auth';
+import { Loading, Header, Footer, Homepage, BrandingPage } from './components';
+import { PrivateRoute, PublicRoute } from './containers';
+import UserContext from './hooks/UserContext';
 
 const App: React.FC = () => {
-  const [theme, toggleTheme, componentMounted] = useDarkMode();
+  const [user, setUser] = useState(() => auth.currentUser);
+  const [loading, setLoading] = useState(true);
 
-  if (!componentMounted) return <div />;
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: firebase.User) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+
+      if (loading) {
+        setLoading(false);
+      }
+    });
+
+    return unsubscribe;
+  }, [loading]);
+
+  if (loading) return <Loading />
 
   return (
-    <Container>
-      <header className='mt-3 mb-4'>
-        <Toggle theme={theme} toggleTheme={toggleTheme} />
-        <h1 className='mt-3'>New Anime</h1>
-        <NewAnime />
-      </header>
+    <UserContext.Provider value={{ user }}>
+      <Container>
+        <BrowserRouter>
+          <Header user={user} signIn={signIn} signOut={signOut} />
 
-      <main className='main mb-4 text-center'>
-        <Animes component={AnimeList} />
-      </main>
+          <main className='main mb-4 text-center'>
+            <Switch>
+              <PublicRoute
+                authenticated={user !== null}
+                path='/'
+                component={BrandingPage}
+                exact
+              />
+              <PrivateRoute
+                authenticated={user !== null}
+                path='/home'
+                component={Homepage}
+                exact
+              />
+            </Switch>
+          </main>
 
-      <footer className='footer text-center mb-3'>&copy; HunteRoi 2020.</footer>
-    </Container>
+          <Footer />
+        </BrowserRouter>
+      </Container>
+    </UserContext.Provider>
   );
 };
 

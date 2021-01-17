@@ -1,15 +1,21 @@
-import React from "react";
-import firebase from "../firebase";
-import NewAnimeForm from "../components/NewAnimeForm";
-import { Anime } from '../models';
+import React from 'react';
 
-const NewAnime: React.FC = () => {
+import firebase from '../firebase/firebase';
+import { NewAnimeForm } from '../components';
+import { Anime } from '../models';
+import UserContext from '../hooks/UserContext';
+
+
+export const NewAnime: React.FC = () => {
+  const { user } = React.useContext(UserContext);
+
   const handleSubmit = (anime: Anime) => {
     firebase
       .firestore()
-      .collection("animes")
+      .collection('animes')
       .add({
-        status: "PlanToWatch",
+        uid: user.uid,
+        status: 'PlanToWatch',
         types: [],
         ...anime
       });
@@ -17,5 +23,3 @@ const NewAnime: React.FC = () => {
 
   return <NewAnimeForm onSubmit={handleSubmit} />;
 };
-
-export default NewAnime;

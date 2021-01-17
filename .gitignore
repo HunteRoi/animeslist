@@ -27,4 +27,4 @@ yarn-error.log*
 firebase.json
 firestore.rules
 firestore.indexes.json
-src/firebase.ts
+src/firebase/

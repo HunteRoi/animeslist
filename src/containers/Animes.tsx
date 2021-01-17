@@ -1,8 +1,10 @@
-import React, { useEffect, useReducer, FunctionComponent } from "react";
+import React, { useEffect, useReducer, FunctionComponent, useContext } from "react";
+
 import { AnimeModel } from '../models';
-import firebase from '../firebase';
-import Loading from '../components/Loading';
+import firebase from '../firebase/firebase';
+import { Loading } from '../components/Loading';
 import { AnimeListProps } from '../components/AnimeList';
+import UserContext from '../hooks/UserContext';
 
 type State = {
   ready: boolean;
@@ -32,25 +34,26 @@ type Props = {
   component: FunctionComponent<AnimeListProps>;
 };
 
-const Animes: React.FC<Props> = ({ component }) => {
+export const Animes: React.FC<Props> = ({ component }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STTE);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    firebase
+    const unsubscribe = firebase
       .firestore()
       .collection('animes')
-      .orderBy('name_english')
+      .where('uid', '==', user.uid)      
       .onSnapshot((snapshot) => {
         for (const { doc, type } of snapshot.docChanges()) {
           const payload = { id: doc.id, ...doc.data() } as AnimeModel;
           dispatch({ type, payload });
         }
       });
-  }, []);
+
+    return unsubscribe;
+  }, [user]);
 
   if (!state.ready) return <Loading />;
 
   return React.createElement(component, { animes: state.animes });
 };
-
-export default Animes;

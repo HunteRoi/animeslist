@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimeModel, Status, Score } from '../models';
-import AnimeModalForm from './AnimeModalForm';
+import { AnimeModalForm } from './AnimeModalForm';
 import { Modal, Button } from 'react-bootstrap';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
   show: boolean
 } & AnimeModel;
 
-const AnimeModalItem: React.FC<Props> = ({
+export const AnimeModalItem: React.FC<Props> = ({
   name_english,
   onDelete,
   handleClose,
@@ -41,5 +41,3 @@ const AnimeModalItem: React.FC<Props> = ({
     </Modal>
   );
 };
-
-export default AnimeModalItem;

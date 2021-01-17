@@ -1,0 +1,6 @@
+.landing-page > h1 {
+  color: white;
+  font: bold 24px/45px Helvetica, Sans-Serif;
+  letter-spacing: -1px;
+  padding: 10px;
+}

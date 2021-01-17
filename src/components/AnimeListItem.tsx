@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure, NavLink, Overlay, Tooltip } from 'react-bootstrap';
+import { isMobile } from 'react-device-detect';
 
 import { AnimeModel, Status, Score } from '../models';
-import AnimeModalItem from './AnimeModalItem';
-import Image from './Image';
+import { AnimeModalItem } from './AnimeModalItem';
+import { Image } from './Image';
 import './AnimeListItem.css';
 
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
   onDelete: () => void;
 } & AnimeModel;
 
-const AnimeListItem: React.FC<Props> = ({ 
+export const AnimeListItem: React.FC<Props> = ({ 
   onChange,
   onDelete,
   id,
@@ -28,19 +29,38 @@ const AnimeListItem: React.FC<Props> = ({
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const target = useRef(null);
-    const [copySuccess, setCopySuccess] = useState(false);
+    const [isSuccess, setSuccess] = useState(false);
 
     const copyToClipboard = async () => {
+      console.log('Using navigator.clipboard');
+
       const text = name_english ? `${name_english}\n${link ?? 'no link found'}` : '';
       await navigator.clipboard.writeText(text);
-      setCopySuccess(true);
+      setSuccess(true);
+    };
+
+    const shareExternal = async () => {
+      if (navigator.share) {
+        console.log('Using navigator.share');
+
+        await navigator.share({
+          title: name_english,
+          text: link ?? 'No link found',
+          url: link,
+        });
+        setSuccess(true);
+      } else {
+        console.log('No navigator.share, defaulting to navigator.clipboard');
+        
+        await copyToClipboard();
+      }
     };
 
     useEffect(() => {
-      if (copySuccess) {
-        setTimeout(() => setCopySuccess(false), 1250);
+      if (isSuccess) {
+        setTimeout(() => setSuccess(false), 1250);
       }
-    }, [copySuccess]);
+    }, [isSuccess]);
 
     return (
       <ListGroupItem key={id}>
@@ -101,14 +121,14 @@ const AnimeListItem: React.FC<Props> = ({
               </Button>{' '}
               <Button
                 variant='secondary'
-                onClick={copyToClipboard}
+                onClick={isMobile ? shareExternal : copyToClipboard}
                 title='Copy the link to this anime and share it'
                 ref={target}
                 className='btn-item'
               >
                 Share
               </Button>
-              <Overlay target={target.current} show={copySuccess} placement='right'>
+              <Overlay target={target.current} show={isSuccess} placement='right'>
                 {(props) => (
                   <Tooltip id='copy-tooltip' {...props}>Copied!</Tooltip>
                 )}
@@ -136,5 +156,3 @@ const AnimeListItem: React.FC<Props> = ({
       </ListGroupItem>
     );
 };
-
-export default AnimeListItem;

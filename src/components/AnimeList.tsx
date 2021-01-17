@@ -3,21 +3,22 @@ import { ListGroup, FormControl, InputGroup, Form } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { AnimeModel } from '../models';
-import Anime from '../containers/Anime';
-import AnimeListItem from '../components/AnimeListItem';
-import Loading from './Loading';
+import { Anime } from '../containers';
+import { AnimeListItem } from './AnimeListItem';
+import { Loading } from './Loading';
+import { sortBy } from '../helpers';
 
 export type AnimeListProps = {
   animes: Array<AnimeModel>;
 };
 
-const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
+export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
   const [filter, setFilter] = useState(""); 
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize] = useState(5);
 
   const sorted = useMemo(() => {
-    let array = animes;
+    let array = sortBy(animes, anime => anime.name_english);
     if (filter) {
       array = array.filter(
         anime =>
@@ -68,5 +69,3 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
     </>
   );
 };
-
-export default AnimeList;

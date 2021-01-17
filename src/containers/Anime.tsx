@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from "react";
 import { AnimeModel, Score, Status } from "../models";
-import firebase from "../firebase";
+import firebase from "../firebase/firebase";
 
 type ComponentProps = {
   onChange: (value: string | undefined | null | Status | Score, propname: string) => void;
@@ -11,7 +11,7 @@ type Props = {
   component: FunctionComponent<ComponentProps>;
 } & AnimeModel;
 
-const Anime: React.FC<Props> = ({ component, id, ...rest }) => {
+export const Anime: React.FC<Props> = ({ component, id, ...rest }) => {
   const docRef = useMemo(() => 
     firebase
       .firestore()
@@ -31,5 +31,3 @@ const Anime: React.FC<Props> = ({ component, id, ...rest }) => {
 
   return React.createElement(component, { id, onChange, onDelete, ...rest });
 };
-
-export default Anime;

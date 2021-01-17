@@ -4,7 +4,7 @@ import './Image.css';
 
 type Props = React.ComponentProps<typeof FigureImage>;
 
-const Image: React.FC<Props> = ({ children, ...rest }) => {
+export const Image: React.FC<Props> = ({ children, ...rest }) => {
   return (
     <div className='image-container'>
       <FigureImage {...rest} />
@@ -12,5 +12,3 @@ const Image: React.FC<Props> = ({ children, ...rest }) => {
     </div>
   );
 };
-
-export default Image;

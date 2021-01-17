@@ -11,7 +11,7 @@ type Props = {
   ) => void;
 } & AnimeModel;
 
-const AnimeModalForm: React.FC<Props> = ({
+export const AnimeModalForm: React.FC<Props> = ({
   onChange,
   id,
   image,
@@ -118,5 +118,3 @@ const AnimeModalForm: React.FC<Props> = ({
     </Form.Group>
   </Form>);
 };
-
-export default AnimeModalForm;

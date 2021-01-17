@@ -6,7 +6,7 @@ type Props = {
   onSubmit: (a: Anime) => void;
 };
 
-const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
+export const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
   const [name_english, setNameEnglish] = useState('');
   const [image, setImage] = useState("");
   const [link, setLink] = useState("");
@@ -78,5 +78,3 @@ const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
     </Form>
   );
 };
-
-export default NewAnimeForm;

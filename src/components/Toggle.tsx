@@ -6,7 +6,7 @@ type Props = {
   toggleTheme: () => void;
 };
 
-const Toggle: React.FC<Props> = ({ theme, toggleTheme }) => {
+export const Toggle: React.FC<Props> = ({ theme, toggleTheme }) => {
   const isLight = theme === 'light';
 
   return (
@@ -15,5 +15,3 @@ const Toggle: React.FC<Props> = ({ theme, toggleTheme }) => {
     </Button>
   );
 };
-
-export default Toggle;
