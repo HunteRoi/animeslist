@@ -13,7 +13,7 @@ export type AnimeListProps = {
 };
 
 export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
-  const [filter, setFilter] = useState(""); 
+  const [filter, setFilter] = useState(''); 
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize] = useState(5);
 
@@ -33,7 +33,9 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
     return totalArray;
   }, [animes, filter, pageNumber, pageSize]);
   
-  const fetchMore = () => setPageNumber(pageNumber + 1);
+  const fetchMore = () => {
+    setPageNumber(pageNumber + 1);
+  };
 
   return (
     <>
@@ -57,10 +59,10 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
         variant='flush'
         as={InfiniteScroll}
         next={fetchMore}
-        hasMore={sorted.length < animes.length && filter === ""}
+        hasMore={animes.length > 0 && sorted.length < animes.length && filter === ''}
         loader={<Loading />}
         endMessage={<Form.Text>No more to load.</Form.Text>}
-        dataLength={sorted.length}
+        dataLength={sorted?.length ?? 0}
       >
         {sorted.map((anime) => (
           <Anime component={AnimeListItem} key={anime.id} {...anime} />

@@ -1,7 +1,6 @@
 {
   "name": "animeslist",
   "version": "1.0.0",
-  "private": true,
   "dependencies": {
     "@forevolve/bootstrap-dark": "^1.0.0-alpha.1091",
     "@pathofdev/react-tag-input": "^1.0.7",
@@ -32,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "react-scripts build & firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"

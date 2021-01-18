@@ -19,22 +19,22 @@ export type AnimeModel = {
 };
 
 export enum Score {
-  Appalling = "Appalling",
-  Horrible = "Horrible",
-  VeryBad = "Very Bad",
-  Bad = "Bad",
-  Average = "Average",
-  Fine = "Fine",
-  Good = "Good",
-  VeryGood = "Very Good",
-  Great = "Great",
-  Masterpiece = "Masterpiece",
+  Appalling = 'Appalling',
+  Horrible = 'Horrible',
+  VeryBad = 'Very Bad',
+  Bad = 'Bad',
+  Average = 'Average',
+  Fine = 'Fine',
+  Good = 'Good',
+  VeryGood = 'Very Good',
+  Great = 'Great',
+  Masterpiece = 'Masterpiece',
 };
 
 export enum Status {
-  Completed = "Completed",
-  Watching = "Watching",
-  OnHold = "On Hold",
-  Dropped = "Dropped",
-  PlanToWatch = "Plan to Watch"
+  Completed = 'Completed',
+  Watching = 'Watching',
+  OnHold = 'On Hold',
+  Dropped = 'Dropped',
+  PlanToWatch = 'Plan to Watch'
 };

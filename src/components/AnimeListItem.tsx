@@ -45,7 +45,7 @@ export const AnimeListItem: React.FC<Props> = ({
 
         await navigator.share({
           title: name_english,
-          text: link ?? 'No link found',
+          text: 'An anime from my personal AnimesList!',
           url: link,
         });
         setSuccess(true);
@@ -71,7 +71,7 @@ export const AnimeListItem: React.FC<Props> = ({
                 {image && (
                   <NavLink onClick={handleShow}>
                     <Image src={image} alt={id + '-image'} rounded>
-                      {status}
+                      {Status[status as keyof typeof Status]}
                     </Image>
                   </NavLink>
                 )}
@@ -128,9 +128,15 @@ export const AnimeListItem: React.FC<Props> = ({
               >
                 Share
               </Button>
-              <Overlay target={target.current} show={isSuccess} placement='right'>
+              <Overlay
+                target={target.current}
+                show={isSuccess}
+                placement='right'
+              >
                 {(props) => (
-                  <Tooltip id='copy-tooltip' {...props}>Copied!</Tooltip>
+                  <Tooltip id='copy-tooltip' {...props}>
+                    Copied!
+                  </Tooltip>
                 )}
               </Overlay>
             </Col>

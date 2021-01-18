@@ -22,7 +22,7 @@ export const AnimeModalItem: React.FC<Props> = ({
   ...rest
 }) => {
   return (
-    <Modal show={show} onHide={handleClose} keyboard={false} centered size="lg">
+    <Modal show={show} onHide={handleClose} keyboard={false} centered size='lg' scrollable={true}>
       <Modal.Header closeButton>
         <Modal.Title>{name_english}</Modal.Title>
       </Modal.Header>
@@ -31,7 +31,7 @@ export const AnimeModalItem: React.FC<Props> = ({
       </Modal.Body>
       <Modal.Footer>
         <Button
-          variant="danger"
+          variant='danger'
           onClick={onDelete}
           title='Delete this anime'
         >

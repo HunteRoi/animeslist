@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Anime, Score } from '../models';
 
@@ -7,15 +7,20 @@ type Props = {
 };
 
 export const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
+  const [error, setError] = useState(null);
   const [name_english, setNameEnglish] = useState('');
-  const [image, setImage] = useState("");
-  const [link, setLink] = useState("");
+  const [image, setImage] = useState('');
+  const [link, setLink] = useState('');
   const [score, setScore] = useState(Score.Average);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    setError(null);
 
-    if (!image.endsWith("jpg") && !image.endsWith("png")) return;
+    if (!image.endsWith('jpg') && !image.endsWith('png')) {
+      setError('The image link does not point to a JPG or PNG file.');
+      return;
+    }
 
     onSubmit({ name_english, image, score, link });
     setNameEnglish('');
@@ -65,7 +70,7 @@ export const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
         defaultValue={score}
         onChange={(e) => setScore(e.target.value as Score)}
       >
-        {Object.keys(Score).map((sc: keyof typeof Score) => (
+        {Object.keys(Score).reverse().map((sc: keyof typeof Score) => (
           <option key={sc} value={sc}>
             {Score[sc]}
           </option>
@@ -75,6 +80,8 @@ export const NewAnimeForm: React.FC<Props> = ( { onSubmit }) => {
       <Button type='submit' className='mb-2'>
         Add anime
       </Button>
+
+      <p className='text-danger'>{error}</p>
     </Form>
   );
 };

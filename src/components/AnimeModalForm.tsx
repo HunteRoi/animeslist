@@ -24,7 +24,7 @@ export const AnimeModalForm: React.FC<Props> = ({
   link,
 }) => {
   return (<Form>
-    {image && <Figure.Image src={image} alt={id} rounded className="mx-auto d-block mb-3"/>}
+    {image && <Figure.Image src={image} alt={id} rounded className='mx-auto d-block mb-3'/>}
     
     <Form.Group as={Row} controlId={id + '-name_english'}>
       <Form.Label column sm={2}>English Name</Form.Label>
@@ -73,7 +73,7 @@ export const AnimeModalForm: React.FC<Props> = ({
           defaultValue={score}
           onChange={(e) => onChange(e.target.value, 'score')}
         >
-          {Object.keys(Score).map((sc: keyof typeof Score) => (
+          {Object.keys(Score).reverse().map((sc: keyof typeof Score) => (
             <option key={sc} value={sc}>{Score[sc]}</option>
           ))}
         </Form.Control>

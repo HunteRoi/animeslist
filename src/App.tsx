@@ -6,7 +6,7 @@ import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap-dark.css';
 import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap.css';
 
 import { auth, signIn, signOut } from './firebase/auth';
-import { Loading, Header, Footer, Homepage, BrandingPage } from './components';
+import { Loading, Header, Footer, Homepage, LandingPage } from './components';
 import { PrivateRoute, PublicRoute } from './containers';
 import UserContext from './hooks/UserContext';
 
@@ -43,7 +43,7 @@ const App: React.FC = () => {
               <PublicRoute
                 authenticated={user !== null}
                 path='/'
-                component={BrandingPage}
+                component={LandingPage}
                 exact
               />
               <PrivateRoute
