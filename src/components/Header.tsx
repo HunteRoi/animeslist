@@ -6,6 +6,8 @@ import { useDarkMode } from '../hooks/useDarkMode';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import './Header.css';
+
 type Props = {
   user: firebase.User;
   signIn: () => void;
@@ -41,6 +43,13 @@ export const Header: React.FC<Props> = ({ user, signIn, signOut }) => {
               </Nav.Item>
             )}
           </Nav>
+
+          {user &&
+            <Nav.Item>
+              <img src={user.photoURL} className='profile-image' alt='avatar' />
+              <span className='profile-text'>{user.displayName}</span>
+            </Nav.Item>
+          }
           <Toggle theme={theme} toggleTheme={toggleTheme} />
         </Navbar.Collapse>
       </Navbar>

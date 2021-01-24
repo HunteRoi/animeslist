@@ -1,0 +1,10 @@
+.profile-image {
+  vertical-align: middle;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.profile-text {
+  padding: 0 1rem 0 .5rem;
+}
