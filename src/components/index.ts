@@ -11,3 +11,4 @@ export * from './Input';
 export * from './Loading';
 export * from './NewAnimeForm';
 export * from './Toggle';
+export * from './UserAvatar';

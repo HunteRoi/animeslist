@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import { Toggle } from './Toggle';
 import { Loading } from './Loading';
+import { UserAvatar } from './UserAvatar';
 import { useDarkMode } from '../hooks/useDarkMode';
-import { Button, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import './Header.css';
 
@@ -16,12 +17,17 @@ type Props = {
 
 export const Header: React.FC<Props> = ({ user, signIn, signOut }) => {
   const [theme, toggleTheme, themeMounted] = useDarkMode();
+  const [isLight, setIsLight] = useState(true);
 
+  useEffect(() => {
+    setIsLight(theme === 'light');
+  }, [theme]);
+  
   if (!themeMounted) return <Loading />;
 
   return (
     <header className='mt-3 mb-4'>
-      <Navbar expand='lg'>
+      <Navbar expand='lg' variant={isLight ? 'light' : 'dark'}>
         <Navbar.Brand>
           <Link to={user ? '/home' : '/'}>AnimesList</Link>
         </Navbar.Brand>
@@ -44,12 +50,7 @@ export const Header: React.FC<Props> = ({ user, signIn, signOut }) => {
             )}
           </Nav>
 
-          {user &&
-            <Nav.Item>
-              <img src={user.photoURL} className='profile-image' alt='avatar' />
-              <span className='profile-text'>{user.displayName}</span>
-            </Nav.Item>
-          }
+          {user && <UserAvatar user={user} />}
           <Toggle theme={theme} toggleTheme={toggleTheme} />
         </Navbar.Collapse>
       </Navbar>
