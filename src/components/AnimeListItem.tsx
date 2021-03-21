@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure, NavLink, Overlay, Tooltip } from 'react-bootstrap';
 import { isMobile } from 'react-device-detect';
+import { confirmAlert } from 'react-confirm-alert';
 
 import { AnimeModel, Status, Score } from '../models';
 import { AnimeModalItem } from './AnimeModalItem';
@@ -31,10 +32,23 @@ export const AnimeListItem: React.FC<Props> = ({
     const target = useRef(null);
     const [isSuccess, setSuccess] = useState(false);
 
+    const handleDelete = () => {
+      confirmAlert({
+        title: name_english,
+        message: 'Are you sure you want to delete this?',
+        buttons: [
+          { label: 'Yes', onClick: onDelete },
+          { label: 'No', onClick: () => {}}
+        ]
+      });
+    };
+
     const copyToClipboard = async () => {
       console.log('Using navigator.clipboard');
 
-      const text = name_english ? `${name_english}\n${link ?? 'no link found'}` : '';
+      const text = name_english 
+        ? `An anime from my personal AnimesList!\r\n${name_english} : ${link ?? 'no link found'}` 
+        : '';
       await navigator.clipboard.writeText(text);
       setSuccess(true);
     };
@@ -45,7 +59,7 @@ export const AnimeListItem: React.FC<Props> = ({
 
         await navigator.share({
           title: name_english,
-          text: 'An anime from my personal AnimesList!',
+          text: `An anime from my personal AnimesList!\r\n${name_english}`,
           url: link,
         });
         setSuccess(true);
@@ -113,7 +127,7 @@ export const AnimeListItem: React.FC<Props> = ({
               </Button>{' '}
               <Button
                 variant='danger'
-                onClick={onDelete}
+                onClick={handleDelete}
                 title='Delete this anime'
                 className='btn-item'
               >
@@ -146,7 +160,7 @@ export const AnimeListItem: React.FC<Props> = ({
         <AnimeModalItem
           show={show}
           handleClose={handleClose}
-          onDelete={onDelete}
+          onDelete={handleDelete}
           onChange={onChange}
           id={id}
           image={image}
