@@ -1,4 +1,3 @@
-
 export type Anime = {
   name_english?: string;
   image?: string;

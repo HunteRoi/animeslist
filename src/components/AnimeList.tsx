@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ListGroup, FormControl, InputGroup, Form } from 'react-bootstrap';
+import { ListGroup, FormControl, InputGroup, Form, Button } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { AnimeModel } from '../models';
@@ -37,6 +37,11 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
     setPageNumber(pageNumber + 1);
   };
 
+  const copyListToClipboard = async () => {
+    const text = animes.map((a) => `• ${a.name_english}`).join('\n');
+    await navigator.clipboard.writeText(text);
+  };
+
   return (
     <>
       <InputGroup className='mb-3'>
@@ -53,6 +58,9 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
           placeholder='Search'
           onChange={(e) => setFilter(e.currentTarget.value)}
         />
+        <InputGroup.Append>
+          <Button variant='secondary' onClick={copyListToClipboard}>Copy list to clipboard</Button>
+        </InputGroup.Append>
       </InputGroup>
 
       <ListGroup
