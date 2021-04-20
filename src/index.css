@@ -7,3 +7,9 @@
 .main {
   flex: 1;
 }
+
+#version {
+  position: fixed;
+  right: 1em;
+  bottom: 0;
+}

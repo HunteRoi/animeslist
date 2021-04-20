@@ -9,6 +9,7 @@ import { auth, signIn, signOut } from './firebase/auth';
 import { Loading, Header, Footer, Homepage, LandingPage } from './components';
 import { PrivateRoute, PublicRoute } from './containers';
 import UserContext from './hooks/UserContext';
+import { version } from '../package.json';;
 
 const App: React.FC = () => {
   const [user, setUser] = useState(() => auth.currentUser);
@@ -56,6 +57,7 @@ const App: React.FC = () => {
           </main>
 
           <Footer />
+          <span id="version">v{version}</span>
         </BrowserRouter>
       </Container>
     </UserContext.Provider>

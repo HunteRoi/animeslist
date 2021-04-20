@@ -44,7 +44,7 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
 
   return (
     <>
-      <InputGroup className='mb-3'>
+      <InputGroup className='mb-3 sticky-top'>
         <InputGroup.Prepend>
           <InputGroup.Text>
             <span role='img' aria-labelledby='search emoji'>
@@ -59,7 +59,7 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
           onChange={(e) => setFilter(e.currentTarget.value)}
         />
         <InputGroup.Append>
-          <Button variant='secondary' onClick={copyListToClipboard}>Copy list to clipboard</Button>
+          <Button variant='secondary' onClick={copyListToClipboard}>Copy list</Button>
         </InputGroup.Append>
       </InputGroup>
 
