@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button, ListGroupItem, Container, Col, Row, Form, Badge, Figure, NavLink, Overlay, Tooltip } from 'react-bootstrap';
 import { isMobile } from 'react-device-detect';
 import { confirmAlert } from 'react-confirm-alert';
+import { FaRegShareSquare } from 'react-icons/fa';
+import { HiShare } from 'react-icons/hi';
 
 import { AnimeModel, Status, Score } from '../models';
 import { AnimeModalItem } from './AnimeModalItem';
@@ -31,6 +33,10 @@ export const AnimeListItem: React.FC<Props> = ({
     const handleShow = () => setShow(true);
     const target = useRef(null);
     const [isSuccess, setSuccess] = useState(false);
+
+    const openLink = () => {
+      window.open(link);
+    };
 
     const handleDelete = () => {
       confirmAlert({
@@ -126,21 +132,13 @@ export const AnimeListItem: React.FC<Props> = ({
                 View more
               </Button>{' '}
               <Button
-                variant='danger'
-                onClick={handleDelete}
-                title='Delete this anime'
-                className='btn-item'
-              >
-                Delete
-              </Button>{' '}
-              <Button
                 variant='secondary'
                 onClick={isMobile ? shareExternal : copyToClipboard}
-                title='Copy the link to this anime and share it'
+                title='Share this anime'
                 ref={target}
                 className='btn-item'
               >
-                Share
+                <HiShare />
               </Button>
               <Overlay
                 target={target.current}
@@ -152,7 +150,23 @@ export const AnimeListItem: React.FC<Props> = ({
                     Copied!
                   </Tooltip>
                 )}
-              </Overlay>
+              </Overlay>{' '}
+              <Button
+                variant='secondary'
+                onClick={openLink}
+                title="Open the entry's link"
+                className='btn-item'
+              >
+                <FaRegShareSquare />
+              </Button>{' '}
+              <Button
+                variant='danger'
+                onClick={handleDelete}
+                title='Delete this anime'
+                className='btn-item'
+              >
+                Delete
+              </Button>
             </Col>
           </Row>
         </Container>

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Modal, Button, Overlay, Tooltip } from 'react-bootstrap';
+import { HiShare } from 'react-icons/hi';
+import { FaRegShareSquare } from 'react-icons/fa';
+import { isMobile } from 'react-device-detect';
+
 import { AnimeModel, Status, Score } from '../models';
 import { AnimeModalForm } from './AnimeModalForm';
-import { Modal, Button } from 'react-bootstrap';
 
 type Props = {
   onChange: (
@@ -10,7 +14,7 @@ type Props = {
   ) => void;
   onDelete: () => void;
   handleClose: () => void;
-  show: boolean
+  show: boolean;
 } & AnimeModel;
 
 export const AnimeModalItem: React.FC<Props> = ({
@@ -22,7 +26,14 @@ export const AnimeModalItem: React.FC<Props> = ({
   ...rest
 }) => {
   return (
-    <Modal show={show} onHide={handleClose} keyboard={false} centered size='lg' scrollable={true}>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      keyboard={false}
+      centered
+      size='lg'
+      scrollable={true}
+    >
       <Modal.Header closeButton>
         <Modal.Title>{name_english}</Modal.Title>
       </Modal.Header>
@@ -30,11 +41,7 @@ export const AnimeModalItem: React.FC<Props> = ({
         <AnimeModalForm name_english={name_english} id={id} {...rest} />
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          variant='danger'
-          onClick={onDelete}
-          title='Delete this anime'
-        >
+        <Button variant='danger' onClick={onDelete} title='Delete this anime'>
           Delete
         </Button>
       </Modal.Footer>

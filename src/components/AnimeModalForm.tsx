@@ -25,7 +25,18 @@ export const AnimeModalForm: React.FC<Props> = ({
 }) => {
   return (<Form>
     {image && <Figure.Image src={image} alt={id} rounded className='mx-auto d-block mb-3'/>}
-    
+    <Form.Group as={Row} controlId={id + '-image'}>
+      <Form.Label column sm={2}>Image URL</Form.Label>
+      <Col sm={10}>
+        <Form.Control
+          value={image}
+          type='url'
+          required
+          onChange={(e) => onChange(e.currentTarget.value, 'image')}
+        />
+      </Col>
+    </Form.Group>
+
     <Form.Group as={Row} controlId={id + '-name_english'}>
       <Form.Label column sm={2}>English Name</Form.Label>
       <Col sm={10}>
