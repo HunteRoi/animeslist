@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { ListGroup, FormControl, InputGroup, Form, Button } from 'react-bootstrap';
+import React, { useContext, useMemo, useState } from 'react';
+import { ListGroup, Form, Button } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { AnimeModel } from '../models';
@@ -7,12 +7,15 @@ import { Anime } from '../containers';
 import { AnimeListItem } from './AnimeListItem';
 import { Loading } from './Loading';
 import { sortBy } from '../helpers';
+import { SearchField } from './SearchField';
+import UserContext from '../hooks/UserContext';
 
 export type AnimeListProps = {
   animes: Array<AnimeModel>;
 };
 
 export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
+  const { user } = useContext(UserContext);
   const [filter, setFilter] = useState(''); 
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize] = useState(5);
@@ -44,25 +47,8 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
 
   return (
     <>
-      <InputGroup className='mb-3 sticky-top'>
-        <InputGroup.Prepend>
-          <InputGroup.Text>
-            <span role='img' aria-labelledby='search emoji'>
-              🔍
-            </span>
-          </InputGroup.Text>
-        </InputGroup.Prepend>
-        <FormControl
-          type='text'
-          value={filter}
-          placeholder='Search'
-          onChange={(e) => setFilter(e.currentTarget.value)}
-        />
-        <InputGroup.Append>
-          <Button variant='secondary' onClick={copyListToClipboard}>Copy list</Button>
-        </InputGroup.Append>
-      </InputGroup>
-
+      <SearchField filter={filter} setFilter={setFilter} />
+      {user && user.displayName === "Tinaël Devresse" && <Button variant='secondary' onClick={copyListToClipboard}>Copy list</Button>}
       <ListGroup
         variant='flush'
         as={InfiniteScroll}

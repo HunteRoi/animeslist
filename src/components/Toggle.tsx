@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 type Props = {
   theme: string;
@@ -10,8 +10,18 @@ export const Toggle: React.FC<Props> = ({ theme, toggleTheme }) => {
   const isLight = theme === 'light';
 
   return (
-    <Button onClick={toggleTheme} className='float-right' variant={isLight ? 'outline-dark' : 'outline-light'}>
-      {'Switch to ' + (isLight ? 'dark' : 'light')}
-    </Button>
+    <OverlayTrigger
+      key="theme-overlay"
+      placement="bottom"
+      overlay={(<Tooltip id="theme-tooltip">Switch to {isLight ? 'dark' : 'light'}</Tooltip>)}
+    >
+      <Form.Check
+        type='switch'
+        id='theme-switch'
+        onClick={toggleTheme}
+        className='float-right'
+        label={isLight ? '☀' : '🌙'}
+      />
+    </OverlayTrigger>
   );
 };

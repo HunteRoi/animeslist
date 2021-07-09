@@ -1,6 +1,11 @@
+import { User } from 'firebase';
 import React from 'react';
 
-const UserContext = React.createContext({
+type Props = {
+  user: User
+};
+
+const UserContext = React.createContext<Props>({
   user: null,
 });
 

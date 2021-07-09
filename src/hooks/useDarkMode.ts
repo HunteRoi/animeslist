@@ -10,16 +10,9 @@ export const useDarkMode = () => {
 
   const toggleTheme = () => {
     if (theme === 'light') {
-    } else {
-      document.body.classList.remove('bootstrap-dark');
-    }
-
-    if (theme === 'light') {
       setMode('dark');
       document.body.classList.add('bootstrap-dark');
-    }
-    else 
-    {
+    } else {
       setMode('light');
       document.body.classList.remove('bootstrap-dark');
     }

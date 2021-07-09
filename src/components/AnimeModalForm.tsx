@@ -29,7 +29,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Image URL</Form.Label>
       <Col sm={10}>
         <Form.Control
-          value={image}
+          defaultValue={image}
           type='url'
           required
           onChange={(e) => onChange(e.currentTarget.value, 'image')}
@@ -41,7 +41,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>English Name</Form.Label>
       <Col sm={10}>
         <Form.Control
-          value={name_english}
+          defaultValue={name_english}
           type='text'
           required
           onChange={(e) => onChange(e.currentTarget.value, 'name_english')}
@@ -53,7 +53,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Japanese Name</Form.Label>
       <Col sm={10}>
         <Form.Control
-          value={name_japanese}
+          defaultValue={name_japanese}
           type='text'
           required
           onChange={(e) => onChange(e.currentTarget.value, 'name_japanese')}
@@ -95,7 +95,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Link</Form.Label>
       <Col sm={10}>
         <Form.Control
-          value={link}
+          defaultValue={link}
           type='url'
           required
           onChange={(e) => onChange(e.currentTarget.value, 'link')}
@@ -120,7 +120,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Col sm={10}>
         <Form.Control
           as='textarea'
-          value={comments}
+          defaultValue={comments}
           type='text'
           required
           onChange={(e) => onChange(e.currentTarget.value, 'comments')}

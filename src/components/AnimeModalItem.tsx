@@ -1,8 +1,5 @@
-import React, { useRef } from 'react';
-import { Modal, Button, Overlay, Tooltip } from 'react-bootstrap';
-import { HiShare } from 'react-icons/hi';
-import { FaRegShareSquare } from 'react-icons/fa';
-import { isMobile } from 'react-device-detect';
+import React from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
 import { AnimeModel, Status, Score } from '../models';
 import { AnimeModalForm } from './AnimeModalForm';
