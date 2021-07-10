@@ -7,15 +7,11 @@ export type Anime = {
 
 export type AnimeModel = {
   id: string;
-  image: string;
-  name_english?: string;
   name_japanese?: string;
   types?: string[];
-  score?: Score;
   status?: Status;
   comments?: string;
-  link?: string;
-};
+} & Anime;
 
 export enum Score {
   Appalling = 'Appalling',

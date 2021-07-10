@@ -38,13 +38,13 @@ export const Header: React.FC<Props> = ({ user, signIn, signOut }) => {
             {user ? (
               <Nav.Item>
                 <Nav.Link>
-                  <Button onClick={signOut}>Sign Out</Button>
+                  <Button onClick={signOut}>SIGN OUT</Button>
                 </Nav.Link>
               </Nav.Item>
             ) : (
               <Nav.Item>
                 <Nav.Link>
-                  <Button onClick={signIn}>Sign In</Button>
+                  <Button onClick={signIn}>SIGN IN</Button>
                 </Nav.Link>
               </Nav.Item>
             )}

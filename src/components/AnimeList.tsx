@@ -16,7 +16,7 @@ export type AnimeListProps = {
 
 export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
   const { user } = useContext(UserContext);
-  const [filter, setFilter] = useState(''); 
+  const [filter, setFilter] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize] = useState(5);
 
@@ -35,7 +35,7 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
     const totalArray = array.slice(0, pageNumber * (pageSize+1));
     return totalArray;
   }, [animes, filter, pageNumber, pageSize]);
-  
+
   const fetchMore = () => {
     setPageNumber(pageNumber + 1);
   };
@@ -47,8 +47,8 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
 
   return (
     <>
-      <SearchField filter={filter} setFilter={setFilter} />
-      {user && user.displayName === "Tinaël Devresse" && <Button variant='secondary' onClick={copyListToClipboard}>Copy list</Button>}
+      <SearchField setValue={setFilter} />
+      {user && user.displayName === 'Tinaël Devresse' && <Button variant='secondary' onClick={copyListToClipboard}>COPY LIST</Button>}
       <ListGroup
         variant='flush'
         as={InfiniteScroll}

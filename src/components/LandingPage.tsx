@@ -14,7 +14,7 @@ export const LandingPage: React.FC = () => {
         <br />
         Write your own comments, grant your own score, list your favorite animes and share them with your friends!
       </p>
-      <Button size='lg' variant='primary' onClick={signIn}>Get Started</Button>
+      <Button size='lg' variant='primary' onClick={signIn}>GET STARTED</Button>
     </section>
   );
 };

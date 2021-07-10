@@ -39,7 +39,7 @@ export const AnimeModalItem: React.FC<Props> = ({
       </Modal.Body>
       <Modal.Footer>
         <Button variant='danger' onClick={onDelete} title='Delete this anime'>
-          Delete
+          DELETE
         </Button>
       </Modal.Footer>
     </Modal>

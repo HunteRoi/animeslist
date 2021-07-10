@@ -15,7 +15,7 @@ type Props = {
   onDelete: () => void;
 } & AnimeModel;
 
-export const AnimeListItem: React.FC<Props> = ({ 
+export const AnimeListItem: React.FC<Props> = ({
   onChange,
   onDelete,
   id,
@@ -43,8 +43,8 @@ export const AnimeListItem: React.FC<Props> = ({
         title: name_english,
         message: 'Are you sure you want to delete this?',
         buttons: [
-          { label: 'Yes', onClick: onDelete },
-          { label: 'No', onClick: () => {}}
+          { label: 'YES', onClick: onDelete },
+          { label: 'NO', onClick: () => {}}
         ]
       });
     };
@@ -52,8 +52,8 @@ export const AnimeListItem: React.FC<Props> = ({
     const copyToClipboard = async () => {
       console.log('Using navigator.clipboard');
 
-      const text = name_english 
-        ? `An anime from my personal AnimesList!\r\n${name_english} : ${link ?? 'no link found'}` 
+      const text = name_english
+        ? `An anime from my personal AnimesList!\r\n${name_english} : ${link ?? 'no link found'}`
         : '';
       await navigator.clipboard.writeText(text);
       setSuccess(true);
@@ -71,7 +71,7 @@ export const AnimeListItem: React.FC<Props> = ({
         setSuccess(true);
       } else {
         console.log('No navigator.share, defaulting to navigator.clipboard');
-        
+
         await copyToClipboard();
       }
     };
@@ -129,7 +129,7 @@ export const AnimeListItem: React.FC<Props> = ({
                 title='View more information about this item'
                 className='btn-item'
               >
-                View more
+                VIEW MORE
               </Button>{' '}
               <Button
                 variant='secondary'
@@ -165,7 +165,7 @@ export const AnimeListItem: React.FC<Props> = ({
                 title='Delete this anime'
                 className='btn-item'
               >
-                Delete
+                DELETE
               </Button>
             </Col>
           </Row>

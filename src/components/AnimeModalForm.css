@@ -104,7 +104,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  content: " ";
+  content: ' ';
   height: .9em;
   width: .15em;
   background-color: #333
@@ -124,6 +124,6 @@
 
 .react-tag-input__tag__remove-readonly:before,
 .react-tag-input__tag__remove-readonly:after {
-  content: "";
+  content: '';
   width: 0
 }

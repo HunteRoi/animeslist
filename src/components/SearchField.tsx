@@ -2,11 +2,14 @@ import React from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
 
 type Props = {
-  filter: string,
-  setFilter: (newFilter: string) => void
+  value?: string,
+  setValue: (newFilter: string) => void
 };
 
-export const SearchField: React.FC<Props> = ({ filter, setFilter }) => {
+export const SearchField: React.FC<Props> = ({ value, setValue }) => {
+  const handleSearch = (event: any) => {
+    setValue(event.target.value);
+  }
 
   return (
       <InputGroup className='mb-3 sticky-top'>
@@ -19,9 +22,8 @@ export const SearchField: React.FC<Props> = ({ filter, setFilter }) => {
         </InputGroup.Prepend>
         <FormControl
           type='text'
-          value={filter}
           placeholder='Search'
-          onChange={(e) => setFilter(e.currentTarget.value)}
+          onChange={handleSearch}
         />
       </InputGroup>
   );

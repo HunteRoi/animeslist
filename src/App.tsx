@@ -57,7 +57,7 @@ const App: React.FC = () => {
           </main>
 
           <Footer />
-          <span id="version">v{version}</span>
+          <span id='version'>v{version}</span>
         </BrowserRouter>
       </Container>
     </UserContext.Provider>

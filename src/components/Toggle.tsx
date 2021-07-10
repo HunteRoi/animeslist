@@ -11,9 +11,9 @@ export const Toggle: React.FC<Props> = ({ theme, toggleTheme }) => {
 
   return (
     <OverlayTrigger
-      key="theme-overlay"
-      placement="bottom"
-      overlay={(<Tooltip id="theme-tooltip">Switch to {isLight ? 'dark' : 'light'}</Tooltip>)}
+      key='theme-overlay'
+      placement='bottom'
+      overlay={(<Tooltip id='theme-tooltip'>Switch to {isLight ? 'dark' : 'light'}</Tooltip>)}
     >
       <Form.Check
         type='switch'

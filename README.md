@@ -8,10 +8,10 @@ In order to be able to use this project, you have to follow these steps:
 5) Edit your `firetore.rules` file with your restrictions rules
 6) Create a file named `firebase.ts` in the `./src` folder with the following content:
 ```typescript
-import * as firebase from "firebase/app";
-import "firebase/firestore";
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 
-const firebaseConfig = { projectId: "YOUR_FIREBASE_PROJECT_ID_HERE" };
+const firebaseConfig = { projectId: 'YOUR_FIREBASE_PROJECT_ID_HERE' };
 firebase.initializeApp(firebaseConfig);
 
 export default firebase;
