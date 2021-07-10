@@ -4,7 +4,7 @@ import { APISearchResponse, LinkAPIResult, APIAnimeResponse } from './anime.mode
 
 function selectUrlInContent(result: LinkAPIResult): string {
   if (!result || !result.content) return null;
-  const matches = result && result.content && /href="([a-zA-Z\-\\/]+)"/.exec(result.content);
+  const matches = result && result.content && /href=""?([a-zA-Z\\\-/]+)"?"/.exec(result.content);
   if (matches && matches.length >= 2) {
     const uri = matches[1].replace(/\\/g, '');
     return `https://www1.gogoanime.ai/${uri}`;
