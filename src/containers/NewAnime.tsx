@@ -12,6 +12,8 @@ export const NewAnime: React.FC = () => {
   const [externalAnime, setExternalAnime] = useState<AnimeModel>(null);
 
   const handleSubmit = (anime: AnimeModel) => {
+    setExternalAnime(null);
+
     firebase
       .firestore()
       .collection('animes')

@@ -1,6 +1,6 @@
 {
   "name": "animeslist",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "dependencies": {
     "@forevolve/bootstrap-dark": "^1.0.0-alpha.1091",
     "@pathofdev/react-tag-input": "^1.0.7",

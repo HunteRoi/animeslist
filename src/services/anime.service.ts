@@ -39,14 +39,16 @@ async function getSearchData(url: string): Promise<APISearchResponse> {
 }
 
 export async function searchAsync(query: string): Promise<AnimeModel> {
-  let animeData: APIAnimeResponse;
-  const adaptedQuery = encodeURIComponent(query);
-  const animeSearchData = await getSearchData(`${fullAnimeAPI}${searchFullAnimeAPIUri}${adaptedQuery}`);
-  const animeProfileResult = await getAnimeProfileLink(`${streamingUrlAnimeAPI}${adaptedQuery}`);
-  const animeProfileLink = selectUrlInContent(animeProfileResult);
+  if (!query) return;
 
+  let animeData: APIAnimeResponse;
+  let animeProfileLink: string;
+
+  const animeSearchData = await getSearchData(`${fullAnimeAPI}${searchFullAnimeAPIUri}${encodeURIComponent(query)}`);
   if (animeSearchData && animeSearchData.results && animeSearchData.results[0]) {
     animeData = await getAnimeData(`${fullAnimeAPI}${animeFullAnimeAPIUri}/${animeSearchData.results[0].mal_id}`);
+    const animeProfileResult = await getAnimeProfileLink(`${streamingUrlAnimeAPI}${encodeURIComponent(animeData.title)}`);
+    animeProfileLink = selectUrlInContent(animeProfileResult);
   }
 
   if (!animeData) {
