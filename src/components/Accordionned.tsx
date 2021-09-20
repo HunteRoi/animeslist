@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Accordionned: React.FC<Props> = ({ label, children }) => {
-  const [shown, setShown] = useStorage('showForm', true);
+  const [shown, setShown] = useStorage(`show-${label.replace(" ","")}Form`, true);
 
   return (
   <Accordion activeKey={shown ? '0' : undefined} className='accordion'>
