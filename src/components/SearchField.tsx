@@ -24,6 +24,8 @@ export const SearchField: React.FC<Props> = ({ value, setValue }) => {
           type='text'
           placeholder='Search'
           onChange={handleSearch}
+          onPaste={handleSearch}
+          onDrop={handleSearch}
         />
       </InputGroup>
   );
