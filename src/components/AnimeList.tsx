@@ -1,5 +1,5 @@
-import React, { useContext, useMemo, useState } from 'react';
-import { ListGroup, Form, Button } from 'react-bootstrap';
+import React, { useMemo, useState } from 'react';
+import { ListGroup, Form } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { AnimeModel } from '../models';
@@ -8,17 +8,19 @@ import { AnimeListItem } from './AnimeListItem';
 import { Loading } from './Loading';
 import { sortBy } from '../helpers';
 import { SearchField } from './SearchField';
-import UserContext from '../hooks/UserContext';
+import FilterForm from './FilterForm';
 
 export type AnimeListProps = {
   animes: Array<AnimeModel>;
 };
 
 export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
-  const { user } = useContext(UserContext);
   const [filter, setFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('')
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize] = useState(5);
+  const [maxPageNumber, setMaxPageNumber] = useState(0);
+  const [copyFullList, setCopyFullList] = useState(false);
 
   const sorted = useMemo(() => {
     let array = sortBy(animes, anime => anime.name_english);
@@ -31,29 +33,35 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
           || (anime.comments && anime.comments.toLowerCase().includes(filter.toLowerCase()))
       );
     }
+    if (statusFilter) {
+      array = array.filter(anime => anime.status && anime.status.toLowerCase().includes(statusFilter.toLowerCase()));
+    }
 
-    const totalArray = array.slice(0, pageNumber * (pageSize+1));
+    setMaxPageNumber(Math.ceil(array.length / pageSize));
+
+    const totalArray = array.slice(0, pageNumber * pageSize);
     return totalArray;
-  }, [animes, filter, pageNumber, pageSize]);
+  }, [animes, filter, pageNumber, pageSize, statusFilter]);
 
   const fetchMore = () => {
     setPageNumber(pageNumber + 1);
   };
 
   const copyListToClipboard = async () => {
-    const text = animes.map((a) => `• ${a.name_english}`).join('\n');
+    const text = (copyFullList ? animes : sorted).map((a) => `• ${a.name_english} (${a.link})`).join('\n');
     await navigator.clipboard.writeText(text);
   };
 
   return (
     <>
+      <FilterForm setCopyFullList={setCopyFullList} copyListToClipboard={copyListToClipboard} setStatusFilter={setStatusFilter} />
       <SearchField setValue={setFilter} />
-      {user && user.displayName === 'Tinaël Devresse' && <Button variant='secondary' onClick={copyListToClipboard}>COPY LIST</Button>}
+
       <ListGroup
         variant='flush'
         as={InfiniteScroll}
         next={fetchMore}
-        hasMore={animes.length > 0 && sorted.length < animes.length && filter === ''}
+        hasMore={pageNumber < maxPageNumber}
         loader={<Loading />}
         endMessage={<Form.Text>No more to load.</Form.Text>}
         dataLength={sorted?.length ?? 0}
