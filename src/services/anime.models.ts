@@ -1,132 +1,265 @@
-export interface APISearchResponse {
-  request_hash: string;
-  request_cached: boolean;
-  request_cache_expiry: number;
-  results: APISearchedAnime[];
+export interface Items {
+  count: number;
+  total: number;
+  per_page: number;
 }
 
-interface APISearchedAnime {
+export interface Pagination {
+  last_visible_page: number;
+  has_next_page: boolean;
+  current_page: number;
+  items: Items;
+}
+
+export interface Jpg {
+  image_url: string;
+  small_image_url: string;
+  large_image_url: string;
+}
+
+export interface Webp {
+  image_url: string;
+  small_image_url: string;
+  large_image_url: string;
+}
+
+export interface Images {
+  jpg: Jpg;
+  webp: Webp;
+}
+
+export interface Images2 {
+  image_url: string;
+  small_image_url: string;
+  medium_image_url: string;
+  large_image_url: string;
+  maximum_image_url: string;
+}
+
+export interface Trailer {
+  youtube_id: string;
+  url: string;
+  embed_url: string;
+  images: Images2;
+}
+
+export interface Title {
+  type: string;
+  title: string;
+}
+
+export interface From {
+  day?: number;
+  month?: number;
+  year?: number;
+}
+
+export interface To {
+  day?: number;
+  month?: number;
+  year?: number;
+}
+
+export interface Prop {
+  from: From;
+  to: To;
+}
+
+export interface Aired {
+  from?: Date;
+  to?: Date;
+  prop: Prop;
+  string: string;
+}
+
+export interface Broadcast {
+  day: string;
+  time: string;
+  timezone: string;
+  string: string;
+}
+
+export interface Producer {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+export interface Licensor {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+export interface Studio {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+export interface Genre {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+export interface Theme {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+export interface Demographic {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+export interface APISearchedAnime {
   mal_id: number;
   url: string;
-  image_url: string;
+  images: Images;
+  trailer: Trailer;
+  approved: boolean;
+  titles: Title[];
   title: string;
-  airing: boolean;
-  synopsis: string;
+  title_english: string;
+  title_japanese: string;
+  title_synonyms: string[];
   type: string;
-  episodes: number;
-  score: number;
-  start_date: Date;
-  end_date: Date;
+  source: string;
+  episodes?: number;
+  status: string;
+  airing: boolean;
+  aired: Aired;
+  duration: string;
+  rating: string;
+  score?: number;
+  scored_by?: number;
+  rank?: number;
+  popularity: number;
   members: number;
-  rated: string;
+  favorites: number;
+  synopsis: string;
+  background: string;
+  season: string;
+  year?: number;
+  broadcast: Broadcast;
+  producers: Producer[];
+  licensors: Licensor[];
+  studios: Studio[];
+  genres: Genre[];
+  explicit_genres: any[];
+  themes: Theme[];
+  demographics: Demographic[];
+}
+
+export interface APISearchResponse {
+  pagination: Pagination;
+  data: APISearchedAnime[];
 }
 
 export interface LinkAPIResult {
   content: string;
 }
 
-interface From {
-  day: number;
-  month: number;
-  year: number;
+export interface Jpg {
+  image_url: string;
+  small_image_url: string;
+  large_image_url: string;
 }
 
-interface To {
-  day: number;
-  month: number;
-  year: number;
+export interface Webp {
+  image_url: string;
+  small_image_url: string;
+  large_image_url: string;
 }
 
-interface Prop {
+export interface Images {
+  jpg: Jpg;
+  webp: Webp;
+}
+
+export interface Images2 {
+  image_url: string;
+  small_image_url: string;
+  medium_image_url: string;
+  large_image_url: string;
+  maximum_image_url: string;
+}
+
+export interface Trailer {
+  youtube_id: string;
+  url: string;
+  embed_url: string;
+  images: Images2;
+}
+
+export interface Title {
+  type: string;
+  title: string;
+}
+
+export interface Prop {
   from: From;
   to: To;
 }
 
-interface Aired {
-  from: Date;
-  to: Date;
-  prop: Prop;
+export interface Broadcast {
+  day: string;
+  time: string;
+  timezone: string;
   string: string;
 }
 
-interface Adaptation {
+export interface Producer {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-interface Sequel {
+export interface Licensor {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-interface SideStory {
+export interface Studio {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-interface Summary {
+export interface Genre {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-interface Related {
-  adaptation: Adaptation[];
-  sequel: Sequel[];
-  sideStory: SideStory[];
-  summary: Summary[];
-}
-
-interface Producer {
-  mal_id: number;
-  type: string;
-  name: string;
-  url: string;
-}
-
-interface Licensor {
-  mal_id: number;
-  type: string;
-  name: string;
-  url: string;
-}
-
-interface Studio {
-  mal_id: number;
-  type: string;
-  name: string;
-  url: string;
-}
-
-interface Genre {
-  mal_id: number;
-  type: string;
-  name: string;
-  url: string;
-}
-
-export interface APIAnimeResponse {
-  request_hash: string;
-  request_cached: boolean;
-  request_cache_expiry: number;
+export interface APIAnimeResult {
   mal_id: number;
   url: string;
-  image_url: string;
-  trailer_url: string;
+  images: Images;
+  trailer: Trailer;
+  approved: boolean;
+  titles: Title[];
   title: string;
   title_english: string;
   title_japanese: string;
   title_synonyms: any[];
   type: string;
   source: string;
-  episodes: number;
+  episodes?: any;
   status: string;
   airing: boolean;
   aired: Aired;
@@ -139,14 +272,19 @@ export interface APIAnimeResponse {
   members: number;
   favorites: number;
   synopsis: string;
-  background: string;
-  premiered: string;
-  broadcast: string;
-  related: Related;
+  background?: any;
+  season: string;
+  year: number;
+  broadcast: Broadcast;
   producers: Producer[];
   licensors: Licensor[];
   studios: Studio[];
   genres: Genre[];
-  opening_themes: string[];
-  ending_themes: string[];
+  explicit_genres: any[];
+  themes: any[];
+  demographics: any[];
+}
+
+export interface APIAnimeResponse {
+  data: APIAnimeResult;
 }
