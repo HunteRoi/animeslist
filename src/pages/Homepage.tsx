@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Animes, NewAnime } from '../containers';
-import { AnimeList } from './AnimeList';
+import { AnimeList } from '../components/AnimeList';
 
 export const Homepage: React.FC = () => {
   return (

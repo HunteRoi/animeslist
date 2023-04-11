@@ -11,11 +11,13 @@ import { Image } from './Image';
 import './AnimeListItem.css';
 
 type Props = {
+  editable: boolean;
   onChange: (value: string | undefined | null | Status | Score, propname: string) => void;
   onDelete: () => void;
 } & AnimeModel;
 
 export const AnimeListItem: React.FC<Props> = ({
+  editable,
   onChange,
   onDelete,
   id,
@@ -39,6 +41,8 @@ export const AnimeListItem: React.FC<Props> = ({
     };
 
     const handleDelete = () => {
+      if (!editable) return;
+
       confirmAlert({
         title: name_english,
         message: 'Are you sure you want to delete this?',
@@ -118,6 +122,7 @@ export const AnimeListItem: React.FC<Props> = ({
               <Form.Group controlId={id + '-comments'}>
                 <Form.Label className='float-left'>Comments</Form.Label>
                 <Form.Control
+                  disabled={!editable}
                   as='textarea'
                   value={comments}
                   onChange={(e) => onChange(e.currentTarget.value, 'comments')}
@@ -159,19 +164,21 @@ export const AnimeListItem: React.FC<Props> = ({
               >
                 <FaRegShareSquare />
               </Button>{' '}
-              <Button
+              {editable && <Button
+                disabled={!editable}
                 variant='danger'
                 onClick={handleDelete}
                 title='Delete this anime'
                 className='btn-item'
               >
                 DELETE
-              </Button>
+              </Button>}
             </Col>
           </Row>
         </Container>
 
         <AnimeModalItem
+          editable={editable}
           show={show}
           handleClose={handleClose}
           onDelete={handleDelete}

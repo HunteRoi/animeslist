@@ -11,6 +11,7 @@ export type AnimeModel = {
   types?: string[];
   status?: Status;
   comments?: string;
+  isPublic?: boolean;
 } & Anime;
 
 export enum Score {

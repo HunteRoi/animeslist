@@ -5,6 +5,7 @@ import { AnimeModel, Status, Score } from '../models';
 import { AnimeModalForm } from './AnimeModalForm';
 
 type Props = {
+  editable: boolean;
   onChange: (
     value: string | undefined | null | Status | Score,
     propname: string
@@ -15,6 +16,7 @@ type Props = {
 } & AnimeModel;
 
 export const AnimeModalItem: React.FC<Props> = ({
+  editable,
   name_english,
   onDelete,
   handleClose,
@@ -35,13 +37,13 @@ export const AnimeModalItem: React.FC<Props> = ({
         <Modal.Title>{name_english}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <AnimeModalForm name_english={name_english} id={id} {...rest} />
+        <AnimeModalForm editable={editable} name_english={name_english} id={id} {...rest} />
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant='danger' onClick={onDelete} title='Delete this anime'>
+      {editable && <Modal.Footer>
+        <Button variant='danger' onClick={onDelete} title='Delete this anime' disabled={!editable}>
           DELETE
         </Button>
-      </Modal.Footer>
+      </Modal.Footer>}
     </Modal>
   );
 };
