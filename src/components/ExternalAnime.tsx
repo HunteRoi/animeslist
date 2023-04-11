@@ -14,7 +14,7 @@ export const ExternalAnime: React.FC<AnimeListProps> = ({ setSearch, externalAni
   return (
     <div className={className}>
       <SearchField setValue={setSearch} />
-      {externalAnime && <AnimeListItem editable={false} key={externalAnime.id} {...externalAnime} onChange={() => {}} onDelete={() => {}}/> }
+      {externalAnime && <AnimeListItem editable={true} key={externalAnime.id} {...externalAnime} onChange={() => {}} onDelete={() => {}}/> }
     </div>
   );
 };
