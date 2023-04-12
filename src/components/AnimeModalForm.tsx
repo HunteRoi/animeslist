@@ -5,13 +5,15 @@ import { AnimeModel, Score, Status } from '../models';
 import './AnimeModalForm.css';
 
 type Props = {
+  editable: boolean;
   onChange: (
-    value: string | undefined | null | Status | Score | string[],
+    value: string | undefined | null | Status | Score | string[] | boolean,
     propname: string
   ) => void;
 } & AnimeModel;
 
 export const AnimeModalForm: React.FC<Props> = ({
+  editable,
   onChange,
   id,
   image,
@@ -22,6 +24,7 @@ export const AnimeModalForm: React.FC<Props> = ({
   status,
   comments,
   link,
+  isPublic
 }) => {
   return (<Form>
     {image && <Figure.Image src={image} alt={id} rounded className='mx-auto d-block mb-3'/>}
@@ -29,6 +32,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Image URL</Form.Label>
       <Col sm={10}>
         <Form.Control
+          disabled={!editable}
           defaultValue={image}
           type='url'
           required
@@ -41,6 +45,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>English Name</Form.Label>
       <Col sm={10}>
         <Form.Control
+          disabled={!editable}
           defaultValue={name_english}
           type='text'
           required
@@ -53,6 +58,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Japanese Name</Form.Label>
       <Col sm={10}>
         <Form.Control
+          disabled={!editable}
           defaultValue={name_japanese}
           type='text'
           required
@@ -64,7 +70,8 @@ export const AnimeModalForm: React.FC<Props> = ({
     <Form.Group as={Row} controlId={id + '-status'}>
       <Form.Label column sm={2}>Status</Form.Label>
       <Col sm={10}>
-        <Form.Control 
+        <Form.Control
+          disabled={!editable}
           as='select' custom
           defaultValue={status}
           onChange={(e) => onChange(e.target.value, 'status')}
@@ -76,10 +83,24 @@ export const AnimeModalForm: React.FC<Props> = ({
       </Col>
     </Form.Group>
 
+    <Form.Group  as={Row} controlId={id + '-ispublic'}>
+      <Form.Label column sm={2}>Is public</Form.Label>
+      <Col sm={10}>
+        <Form.Check
+          disabled={!editable}
+          style={{ paddingTop: '7px' }}
+          type='switch'
+          defaultChecked={isPublic}
+          onChange={(e) => onChange(e.target.checked, 'isPublic')}
+        />
+      </Col>
+    </Form.Group>
+
     <Form.Group as={Row} controlId={id + '-score'}>
       <Form.Label column sm={2}>Score</Form.Label>
       <Col sm={10}>
-        <Form.Control 
+        <Form.Control
+          disabled={!editable}
           as='select' custom
           defaultValue={score}
           onChange={(e) => onChange(e.target.value, 'score')}
@@ -95,6 +116,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Link</Form.Label>
       <Col sm={10}>
         <Form.Control
+          disabled={!editable}
           defaultValue={link}
           type='url'
           required
@@ -107,6 +129,8 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Types</Form.Label>
       <Col sm={10}>
         <ReactTagInput
+          editable={editable}
+          readOnly={!editable}
           tags={types}
           placeholder={' '}
           onChange={(newTypes) => onChange(newTypes, 'types')}
@@ -119,6 +143,7 @@ export const AnimeModalForm: React.FC<Props> = ({
       <Form.Label column sm={2}>Comments</Form.Label>
       <Col sm={10}>
         <Form.Control
+          disabled={!editable}
           as='textarea'
           defaultValue={comments}
           type='text'

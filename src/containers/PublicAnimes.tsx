@@ -1,9 +1,8 @@
-import React, { useEffect, useReducer, FunctionComponent, useContext } from 'react';
+import React, { useEffect, useReducer, FunctionComponent } from 'react';
 
 import { AnimeModel } from '../models';
 import firebase from '../firebase/firebase';
 import { AnimeListProps } from '../components/AnimeList';
-import UserContext from '../hooks/UserContext';
 
 type State = {
   animes: Array<AnimeModel>;
@@ -23,23 +22,24 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-const INITIAL_STTE: State= {
+const INITIAL_STTE: State = {
   animes: new Array<AnimeModel>()
 }; 
 
 type Props = {
   component: FunctionComponent<AnimeListProps>;
+  userid?: string;
 };
 
-export const Animes: React.FC<Props> = ({ component }) => {
+export const PublicAnimes: React.FC<Props> = ({ component, userid }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STTE);
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const unsubscribe = firebase
       .firestore()
       .collection('animes')
-      .where('uid', '==', user.uid)
+      .where('uid', '==', userid)
+      .where('isPublic', '==', true)
       .onSnapshot((snapshot) => {
         for (const { doc, type } of snapshot.docChanges()) {
           const payload = { id: doc.id, ...doc.data() } as AnimeModel;
@@ -48,7 +48,7 @@ export const Animes: React.FC<Props> = ({ component }) => {
       });
 
     return unsubscribe;
-  }, [user]);
+  }, [userid]);
 
-  return React.createElement(component, { animes: state.animes, editable: true });
+  return React.createElement(component, { animes: state.animes, editable: false });
 };

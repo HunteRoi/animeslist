@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap-dark.css';
 import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap.css';
 
 import { auth, signIn, signOut } from './firebase/auth';
-import { Loading, Header, Footer, Homepage, LandingPage } from './components';
+import { Loading, Header, Footer } from './components';
 import { PrivateRoute, PublicRoute } from './containers';
+import { Homepage, PublicAnimesList, LandingPage } from './pages';
 import UserContext from './hooks/UserContext';
-import { version } from '../package.json';;
+import { version } from '../package.json';
 
 const App: React.FC = () => {
   const [user, setUser] = useState(() => auth.currentUser);
@@ -41,6 +42,7 @@ const App: React.FC = () => {
 
           <main className='main mb-4 text-center'>
             <Switch>
+              <Route path='/users/:userid' component={PublicAnimesList} />
               <PublicRoute
                 authenticated={user !== null}
                 path='/'

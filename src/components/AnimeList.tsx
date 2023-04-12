@@ -12,9 +12,10 @@ import FilterForm from './FilterForm';
 
 export type AnimeListProps = {
   animes: Array<AnimeModel>;
+  editable: boolean
 };
 
-export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
+export const AnimeList: React.FC<AnimeListProps> = ({ animes, editable }) => {
   const [filter, setFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('')
   const [pageNumber, setPageNumber] = useState(1);
@@ -67,7 +68,7 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes }) => {
         dataLength={sorted?.length ?? 0}
       >
         {sorted.map((anime) => (
-          <Anime component={AnimeListItem} key={anime.id} {...anime} />
+          <Anime component={AnimeListItem} key={anime.id} {...anime} editable={editable} />
         ))}
       </ListGroup>
     </>
