@@ -50,7 +50,11 @@ export const Header: React.FC<Props> = ({ user, signIn, signOut }) => {
             )}
           </Nav>
 
-          {user && <UserAvatar user={user} />}
+          {user &&
+            <Nav.Link href={`/users/${user.uid}`}>
+              <UserAvatar user={user} />
+            </Nav.Link>
+          }
           <Toggle theme={theme} toggleTheme={toggleTheme} />
         </Navbar.Collapse>
       </Navbar>

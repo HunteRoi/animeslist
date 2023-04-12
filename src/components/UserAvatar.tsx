@@ -11,13 +11,13 @@ export const UserAvatar: React.FC<Props> = ({ user }) => {
 
   useEffect(() => {
     if (show) {
-      setTimeout(() => setShow(false), 1250);
+      setTimeout(() => setShow(false), 2000);
     }
   }, [show]);
 
   return (
     <>
-      <div ref={target} onClick={() => setShow(!show)}>
+      <div ref={target} onMouseOver={() => setShow(!show)}>
         <img src={user.photoURL} className='profile-image' alt='avatar' />
         <span className='profile-text'>{user.displayName}</span>
       </div>
