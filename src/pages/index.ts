@@ -1,3 +1,3 @@
 export * from './Homepage';
-export * from './LandingPage';
+export * from './LandingPage/LandingPage';
 export * from './PublicAnimeList';

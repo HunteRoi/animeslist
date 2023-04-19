@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-import Accordionned from "./Accordionned";
+import Accordionned from "./Accordionned/Accordionned";
 import CopyField from "./CopyField";
 import StatusFilterField from "./StatusFilterField";
 

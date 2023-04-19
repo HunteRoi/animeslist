@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import './LandingPage.css';
 
-import { signIn } from '../firebase/auth';
+import { signIn } from '../../firebase/auth';
 
 export const LandingPage: React.FC = () => {
   return (

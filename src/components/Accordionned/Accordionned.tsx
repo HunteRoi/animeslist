@@ -1,7 +1,7 @@
 import React from 'react';
 import {Accordion } from 'react-bootstrap';
 
-import useStorage from '../hooks/useStorage';
+import useStorage from '../../hooks/useStorage';
 import './Accordionned.css';
 
 type Props = {

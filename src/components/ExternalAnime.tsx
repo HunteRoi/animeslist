@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { AnimeModel } from '../models';
-import { AnimeListItem } from './AnimeListItem';
+import { AnimeListItem } from './AnimeListItem/AnimeListItem';
 import { SearchField } from './SearchField';
 
 export type AnimeListProps = {

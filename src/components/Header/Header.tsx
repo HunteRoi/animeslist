@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { Toggle } from './Toggle';
-import { Loading } from './Loading';
-import { UserAvatar } from './UserAvatar';
-import { useDarkMode } from '../hooks/useDarkMode';
+import { Toggle } from '../Toggle';
+import { Loading } from '../Loading';
+import { UserAvatar } from '../UserAvatar';
+import { useDarkMode } from '../../hooks/useDarkMode';
 
 import './Header.css';
 

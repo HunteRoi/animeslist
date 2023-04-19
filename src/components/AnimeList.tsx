@@ -4,7 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { AnimeModel } from '../models';
 import { Anime } from '../containers';
-import { AnimeListItem } from './AnimeListItem';
+import { AnimeListItem } from './AnimeListItem/AnimeListItem';
 import { Loading } from './Loading';
 import { sortBy } from '../helpers';
 import { SearchField } from './SearchField';

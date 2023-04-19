@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 
 import { AnimeModel } from '../models';
 import { ExternalAnime } from './ExternalAnime';
-import Accordionned from './Accordionned';
+import Accordionned from './Accordionned/Accordionned';
 
 type Props = {
   onSubmit: (a: AnimeModel) => void,

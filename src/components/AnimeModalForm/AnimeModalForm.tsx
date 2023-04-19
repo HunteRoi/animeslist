@@ -1,7 +1,7 @@
 import ReactTagInput from '@pathofdev/react-tag-input';
 import React from 'react';
 import { Col, Form, Row, Figure } from 'react-bootstrap';
-import { AnimeModel, Score, Status } from '../models';
+import { AnimeModel, Score, Status } from '../../models';
 import './AnimeModalForm.css';
 
 type Props = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 import { AnimeModel, Status, Score } from '../models';
-import { AnimeModalForm } from './AnimeModalForm';
+import { AnimeModalForm } from './AnimeModalForm/AnimeModalForm';
 
 type Props = {
   editable: boolean;

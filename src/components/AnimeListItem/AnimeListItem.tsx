@@ -5,9 +5,9 @@ import { confirmAlert } from 'react-confirm-alert';
 import { FaRegShareSquare } from 'react-icons/fa';
 import { HiShare } from 'react-icons/hi';
 
-import { AnimeModel, Status, Score } from '../models';
-import { AnimeModalItem } from './AnimeModalItem';
-import { Image } from './Image';
+import { AnimeModel, Status, Score } from '../../models';
+import { AnimeModalItem } from '../AnimeModalItem';
+import { Image } from '../Image/Image';
 import './AnimeListItem.css';
 
 type Props = {
