@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export interface Items {
   count: number;
   total: number;

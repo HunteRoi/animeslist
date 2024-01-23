@@ -1,34 +1,31 @@
 {
 	"name": "animeslist",
-	"version": "1.3.1",
+	"version": "2.0.0",
 	"license": "MIT",
 	"dependencies": {
-		"@forevolve/bootstrap-dark": "^1.0.0-alpha.1091",
 		"@pathofdev/react-tag-input": "^1.0.7",
-		"bootstrap": "^4.5.2",
-		"firebase": "^7.22.0",
+		"bootstrap": "^5.3.2",
+		"firebase": "^10.7.2",
 		"lodash": "^4.17.21",
-		"react": "^16.13.1",
-		"react-bootstrap": "^1.3.0",
-		"react-confirm-alert": "^2.7.0",
-		"react-device-detect": "^1.15.0",
-		"react-dom": "^16.13.1",
-		"react-icons": "^4.2.0",
-		"react-infinite-scroll-component": "^5.1.0",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "3.4.3"
+		"react": "^18.2.0",
+		"react-bootstrap": "^2.10.0",
+		"react-confirm-alert": "^3.0.6",
+		"react-device-detect": "^2.2.3",
+		"react-dom": "^18.2.0",
+		"react-icons": "^5.0.1",
+		"react-infinite-scroll-component": "^6.1.0",
+		"react-router-dom": "^6.21.3",
+		"react-scripts": "^5.0.1"
 	},
 	"devDependencies": {
-		"@testing-library/jest-dom": "^4.2.4",
-		"@testing-library/react": "^9.3.2",
-		"@testing-library/user-event": "^7.1.2",
-		"@types/jest": "^24.0.0",
-		"@types/lodash": "^4.14.161",
-		"@types/node": "^12.12.55",
-		"@types/react": "^16.9.49",
-		"@types/react-dom": "^16.9.8",
-		"@types/react-router-dom": "^5.1.7",
-		"typescript": "^3.8.3"
+		"@types/lodash": "^4.14.202",
+		"@types/node": "^20.11.5",
+		"@types/react": "^18.2.48",
+		"@types/react-dom": "^18.2.18",
+		"@typescript-eslint/eslint-plugin": "^6.19.1",
+		"@typescript-eslint/parser": "^6.19.1",
+		"eslint": "^8.56.0",
+		"typescript": "^5.3.3"
 	},
 	"engines": {
 		"node": ">=16.6.0"
@@ -36,23 +33,21 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"deploy": "react-scripts build & firebase deploy"
+		"deploy": "react-scripts build & firebase deploy",
+		"lint": "eslint ./src --ext .tsx .ts -e \"node_modules\""
 	},
 	"eslintConfig": {
-		"extends": "react-app"
+		"extends": [
+			"react-app"
+		]
 	},
 	"browserslist": {
 		"production": [
-			">0.3%",
-			"not ie 11",
+			">0.2%",
 			"not dead",
 			"not op_mini all"
 		],
 		"development": [
-			">0.3%",
-			"not ie 11",
 			"last 1 chrome version",
 			"last 1 firefox version",
 			"last 1 safari version"

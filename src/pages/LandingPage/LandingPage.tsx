@@ -2,10 +2,10 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import './LandingPage.css';
 
-import { signIn } from '../../firebase/auth';
+import { signIn } from '../../firebase';
 
 export const LandingPage: React.FC = () => {
-  return (
+  return (<>
     <section className='landing-page'>
       <img src='https://geekbecois.com/wp-content/uploads/2020/02/my-hero-academia.png' width='50%' alt='Branding page logo'/>
       <h1>Stop editing several times</h1>
@@ -16,5 +16,5 @@ export const LandingPage: React.FC = () => {
       </p>
       <Button size='lg' variant='primary' onClick={signIn}>GET STARTED</Button>
     </section>
-  );
+  </>);
 };

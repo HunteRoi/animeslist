@@ -1,9 +1,9 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 
-import Accordionned from "./Accordionned/Accordionned";
-import CopyField from "./CopyField";
-import StatusFilterField from "./StatusFilterField";
+import { Accordionned } from './Accordionned';
+import { CopyField } from './CopyField';
+import { StatusFilterField } from './StatusFilterField';
 
 type Props = {
   setStatusFilter: (value: string) => void;
@@ -11,14 +11,14 @@ type Props = {
   copyListToClipboard: () => void;
 };
 
-const FilterForm: React.FC<Props> = ({
+export const FilterForm: React.FC<Props> = ({
   setStatusFilter,
   setCopyFullList,
   copyListToClipboard,
 }) => {
   return (
     <>
-      <Accordionned label="Filters">
+      <Accordionned label='Filters'>
         <Row>
           <Col>
             <StatusFilterField setValue={setStatusFilter} />
@@ -34,5 +34,3 @@ const FilterForm: React.FC<Props> = ({
     </>
   );
 };
-
-export default FilterForm;

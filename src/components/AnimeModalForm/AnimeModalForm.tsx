@@ -1,13 +1,15 @@
 import ReactTagInput from '@pathofdev/react-tag-input';
 import React from 'react';
-import { Col, Form, Row, Figure } from 'react-bootstrap';
+import { Col, Form, Figure, FloatingLabel } from 'react-bootstrap';
+
 import { AnimeModel, Score, Status } from '../../models';
+
 import './AnimeModalForm.css';
 
 type Props = {
   editable: boolean;
   onChange: (
-    value: string | undefined | null | Status | Score | string[] | boolean,
+    value: string | undefined | boolean | null | Status | Score | string[],
     propname: string
   ) => void;
 } & AnimeModel;
@@ -28,129 +30,112 @@ export const AnimeModalForm: React.FC<Props> = ({
 }) => {
   return (<Form>
     {image && <Figure.Image src={image} alt={id} rounded className='mx-auto d-block mb-3'/>}
-    <Form.Group as={Row} controlId={id + '-image'}>
-      <Form.Label column sm={2}>Image URL</Form.Label>
-      <Col sm={10}>
-        <Form.Control
-          disabled={!editable}
-          defaultValue={image}
-          type='url'
-          required
-          onChange={(e) => onChange(e.currentTarget.value, 'image')}
-        />
-      </Col>
-    </Form.Group>
+    
+    <FloatingLabel className='mb-2' controlId={id + '-image'} label='Image URL' >
+      <Form.Control
+        placeholder='Image URL'
+        disabled={!editable}
+        defaultValue={image}
+        type='url'
+        required
+        onChange={(e) => onChange(e.currentTarget.value, 'image')}
+      />
+    </FloatingLabel>
+    
+    <FloatingLabel className='mb-2' controlId={id + '-name_english'} label='English Name' >
+      <Form.Control
+        placeholder='English Name'
+        disabled={!editable}
+        defaultValue={name_english}
+        type='text'
+        required
+        onChange={(e) => onChange(e.currentTarget.value, 'name_english')}
+      />
+    </FloatingLabel>
 
-    <Form.Group as={Row} controlId={id + '-name_english'}>
-      <Form.Label column sm={2}>English Name</Form.Label>
-      <Col sm={10}>
-        <Form.Control
-          disabled={!editable}
-          defaultValue={name_english}
-          type='text'
-          required
-          onChange={(e) => onChange(e.currentTarget.value, 'name_english')}
-        />
-      </Col>
-    </Form.Group>
+    <FloatingLabel className='mb-2' controlId={id + '-name_japanese'} label='Japanese Name'>
+      <Form.Control
+        placeholder='Japanese Name'
+        disabled={!editable}
+        defaultValue={name_japanese}
+        type='text'
+        required
+        onChange={(e) => onChange(e.currentTarget.value, 'name_japanese')}
+      />
+    </FloatingLabel>
 
-    <Form.Group as={Row} controlId={id + '-name_japanese'}>
-      <Form.Label column sm={2}>Japanese Name</Form.Label>
-      <Col sm={10}>
-        <Form.Control
-          disabled={!editable}
-          defaultValue={name_japanese}
-          type='text'
-          required
-          onChange={(e) => onChange(e.currentTarget.value, 'name_japanese')}
-        />
-      </Col>
-    </Form.Group>
+    <FloatingLabel className='mb-2' controlId={id + '-status'} label='Status'>
+      <Form.Select
+        aria-label='Status'
+        disabled={!editable}
+        defaultValue={status}
+        onChange={(e) => onChange(e.target.value, 'status')}
+      >
+        {Object.keys(Status).map((stat: string) => (
+          <option key={stat} value={stat}>{Status[stat as keyof typeof Status]}</option>
+        ))}
+      </Form.Select>
+    </FloatingLabel>
 
-    <Form.Group as={Row} controlId={id + '-status'}>
-      <Form.Label column sm={2}>Status</Form.Label>
-      <Col sm={10}>
-        <Form.Control
-          disabled={!editable}
-          as='select' custom
-          defaultValue={status}
-          onChange={(e) => onChange(e.target.value, 'status')}
-        >
-          {Object.keys(Status).map((stat: keyof typeof Status) => (
-            <option key={stat} value={stat}>{Status[stat]}</option>
-          ))}
-        </Form.Control>
-      </Col>
-    </Form.Group>
+    <FloatingLabel className='mb-2' controlId={id + '-score'} label='Score'>
+      <Form.Select
+        aria-label='Score'
+        disabled={!editable}
+        defaultValue={score}
+        onChange={(e) => onChange(e.target.value, 'score')}
+      >
+        {Object.keys(Score).reverse().map((sc: string) => (
+          <option key={sc} value={sc}>{Score[sc as keyof typeof Score]}</option>
+        ))}
+      </Form.Select>
+    </FloatingLabel>
 
-    <Form.Group  as={Row} controlId={id + '-ispublic'}>
-      <Form.Label column sm={2}>Is public</Form.Label>
-      <Col sm={10}>
-        <Form.Check
-          disabled={!editable}
-          style={{ paddingTop: '7px' }}
-          type='switch'
-          defaultChecked={isPublic}
-          onChange={(e) => onChange(e.target.checked, 'isPublic')}
-        />
-      </Col>
-    </Form.Group>
+    <FloatingLabel className='mb-2' controlId={id + '-link'} label='Link'>
+      <Form.Control
+        placeholder='Link'
+        disabled={!editable}
+        defaultValue={link}
+        type='url'
+        required
+        onChange={(e) => onChange(e.currentTarget.value, 'link')}
+      />
+    </FloatingLabel>
 
-    <Form.Group as={Row} controlId={id + '-score'}>
-      <Form.Label column sm={2}>Score</Form.Label>
-      <Col sm={10}>
-        <Form.Control
-          disabled={!editable}
-          as='select' custom
-          defaultValue={score}
-          onChange={(e) => onChange(e.target.value, 'score')}
-        >
-          {Object.keys(Score).reverse().map((sc: keyof typeof Score) => (
-            <option key={sc} value={sc}>{Score[sc]}</option>
-          ))}
-        </Form.Control>
-      </Col>
-    </Form.Group>
+    <FloatingLabel className='mb-2' controlId={id + '-comments'} label='Comments'>
+      <Form.Control
+        placeholder='Comments'
+        disabled={!editable}
+        as='textarea'
+        defaultValue={comments}
+        type='text'
+        required
+        onChange={(e) => onChange(e.currentTarget.value, 'comments')}
+      />
+    </FloatingLabel>
 
-    <Form.Group as={Row} controlId={id + '-link'}>
-      <Form.Label column sm={2}>Link</Form.Label>
-      <Col sm={10}>
-        <Form.Control
-          disabled={!editable}
-          defaultValue={link}
-          type='url'
-          required
-          onChange={(e) => onChange(e.currentTarget.value, 'link')}
-        />
-      </Col>
-    </Form.Group>
-
-    <Form.Group as={Row} controlId={id + '-types'}>
+    <Form.Group className='mb-2' controlId={id + '-types'}>
       <Form.Label column sm={2}>Types</Form.Label>
       <Col sm={10}>
         <ReactTagInput
+          placeholder=' '
           editable={editable}
           readOnly={!editable}
-          tags={types}
-          placeholder={' '}
+          tags={types ?? []}
           onChange={(newTypes) => onChange(newTypes, 'types')}
           removeOnBackspace={true}
         />
       </Col>
     </Form.Group>
 
-    <Form.Group as={Row} controlId={id + '-comments'}>
-      <Form.Label column sm={2}>Comments</Form.Label>
-      <Col sm={10}>
-        <Form.Control
-          disabled={!editable}
-          as='textarea'
-          defaultValue={comments}
-          type='text'
-          required
-          onChange={(e) => onChange(e.currentTarget.value, 'comments')}
-        />
-      </Col>
+    <Form.Group className='mb-2' controlId={id + '-ispublic'} style={{ margin: '.5em 0 .3em 0', display: 'flex', flexDirection: 'row', gap: '1em', alignItems: 'center' }}>
+      <Form.Label as={'span'} style={{ marginBottom: '-.25em' }}>Is public</Form.Label>
+      <Form.Check
+        disabled={!editable}
+        style={{ paddingTop: '7px' }}
+        type='switch'
+        defaultChecked={isPublic}
+        onChange={(e) => onChange(e.target.checked, 'isPublic')}
+      />
     </Form.Group>
   </Form>);
 };

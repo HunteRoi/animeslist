@@ -1,5 +1,5 @@
-export const fullAnimeAPI: string = "https://api.jikan.moe/v4";
-export const searchFullAnimeAPIUri: string = "/anime?q=";
-export const animeFullAnimeAPIUri: string = "/anime";
+export const fullAnimeAPI = 'https://api.jikan.moe/v4';
+export const searchFullAnimeAPIUri = '/anime?q=';
+export const animeFullAnimeAPIUri = '/anime';
 
-export const streamingUrlAnimeAPI: string = "https://ajax.gogo-load.com/site/loadAjaxSearch?keyword=";
+export const streamingUrlAnimeAPI = 'https://ajax.gogo-load.com/site/loadAjaxSearch?keyword=';

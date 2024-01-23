@@ -1,0 +1,2 @@
+- ignore node_modules tsx/eslint
+- fix routing due to Private/PublicRoute

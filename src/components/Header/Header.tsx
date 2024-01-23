@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { User } from 'firebase/auth';
+import { BsBoxArrowInLeft, BsBoxArrowInRight } from 'react-icons/bs';
 
 import { Toggle } from '../Toggle';
 import { Loading } from '../Loading';
@@ -10,7 +12,7 @@ import { useDarkMode } from '../../hooks/useDarkMode';
 import './Header.css';
 
 type Props = {
-  user: firebase.User;
+  user: User | null;
   signIn: () => void;
   signOut: () => void;
 };
@@ -31,31 +33,40 @@ export const Header: React.FC<Props> = ({ user, signIn, signOut }) => {
         <Navbar.Brand>
           <Link to={user ? '/home' : '/'}>AnimesList</Link>
         </Navbar.Brand>
-        <Navbar.Toggle />
+        
+        <Navbar.Toggle aria-controls='navbar-collapse' />
 
         <Navbar.Collapse id='navbar-collapse'>
-          <Nav className='mr-auto'>
+          <Nav style={{ alignItems: 'center', justifyContent: 'center' }} className='me-auto'>
             {user ? (
               <Nav.Item>
                 <Nav.Link>
-                  <Button onClick={signOut}>SIGN OUT</Button>
+                  <Button onClick={signOut}>
+                    <BsBoxArrowInRight />
+                    {' '}Sign out
+                  </Button>
                 </Nav.Link>
               </Nav.Item>
             ) : (
               <Nav.Item>
                 <Nav.Link>
-                  <Button onClick={signIn}>SIGN IN</Button>
+                  <Button onClick={signIn}>
+                    <BsBoxArrowInLeft />
+                    {' '}Sign in
+                  </Button>
                 </Nav.Link>
               </Nav.Item>
             )}
           </Nav>
-
-          {user &&
-            <Nav.Link href={`/users/${user.uid}`}>
-              <UserAvatar user={user} />
-            </Nav.Link>
-          }
-          <Toggle theme={theme} toggleTheme={toggleTheme} />
+          
+          <Nav style={{ alignItems: 'center', justifyContent: 'center' }} className='ms-auto'>
+            {user &&
+              <Nav.Link href={`/users/${user.uid}`}>
+                <UserAvatar user={user} />
+              </Nav.Link>
+            }
+            <Toggle theme={theme} toggleTheme={toggleTheme} />
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     </header>

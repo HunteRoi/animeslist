@@ -25,7 +25,7 @@ export enum Score {
   VeryGood = 'Very Good',
   Great = 'Great',
   Masterpiece = 'Masterpiece',
-};
+}
 
 export enum Status {
   Completed = 'Completed',
@@ -33,4 +33,4 @@ export enum Status {
   OnHold = 'On Hold',
   Dropped = 'Dropped',
   PlanToWatch = 'Plan to Watch'
-};
+}

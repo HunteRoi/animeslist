@@ -1,12 +1,10 @@
-import { User } from 'firebase';
+import { User } from 'firebase/auth';
 import React from 'react';
 
 type Props = {
-  user: User
+  user: User | null
 };
 
-const UserContext = React.createContext<Props>({
+export const UserContext = React.createContext<Props>({
   user: null,
 });
-
-export default UserContext;

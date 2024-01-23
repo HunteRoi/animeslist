@@ -6,7 +6,7 @@ type Props = {
   setValue: (value: string) => void;
 };
 
-const StatusFilterField: React.FC<Props> = ({ setValue }) => (
+export const StatusFilterField: React.FC<Props> = ({ setValue }) => (
   <Form.Group as={Row}>
     <Form.Label column sm={3}>
       Filter by Status
@@ -14,19 +14,16 @@ const StatusFilterField: React.FC<Props> = ({ setValue }) => (
     <Col md='auto'>
       <Form.Control
         as='select'
-        custom
         onChange={(e) => setValue(e.currentTarget.value)}
         size='sm'
       >
         <option key='' value=''>None</option>
-        {Object.keys(Status).map((stat: keyof typeof Status) => (
+        {Object.keys(Status).map((stat: string) => (
           <option key={stat} value={stat}>
-            {Status[stat]}
-          </option>
+            {Status[stat as keyof typeof Status]}
+         </option>
         ))}
       </Form.Control>
     </Col>
   </Form.Group>
 );
-
-export default StatusFilterField;

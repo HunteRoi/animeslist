@@ -5,7 +5,7 @@ import { PublicAnimes } from '../containers';
 import { AnimeList } from '../components';
 
 export const PublicAnimesList: React.FC = () => {
-  const {userid} = useParams<{userid:string}>();
+  const { userid } = useParams<{ userid:string }>();
   return (
     <>
       <PublicAnimes component={AnimeList} userid={userid} />
