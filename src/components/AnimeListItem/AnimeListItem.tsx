@@ -91,7 +91,7 @@ export const AnimeListItem: React.FC<Props> = ({
     }, [isSuccess]);
 
     return (
-      <ListGroupItem key={id} className='mt-3'>
+      <ListGroupItem key={id} className='mt-3 pb-3'>
         <Container fluid>
           <Row>
             <Col md='auto'>
@@ -137,7 +137,7 @@ export const AnimeListItem: React.FC<Props> = ({
                 />
               </Form.Group>
               
-              <FloatingLabel controlId={id + '-comments'} label='Comments'>
+              <FloatingLabel controlId={id + '-comments'} label='Comments' className='mt-2 mb-3'>
                 <Form.Control
                   as='textarea'
                   disabled={!editable}
