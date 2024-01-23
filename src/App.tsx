@@ -41,7 +41,7 @@ export const App: React.FC = () => {
 
           <main className='main mb-4 text-center'>
             <Routes>
-              <Route path='/users/:userid' element={<PublicRoute authenticated={true} component={PublicAnimesList} />} />
+              <Route path='/users/:userid' element={<PublicRoute authenticated={false} component={PublicAnimesList} />} />
               <Route path='/home' element={<PrivateRoute authenticated={user !== null} component={Homepage} />} />
               <Route path='/*' element={<PublicRoute authenticated={user !== null} component={LandingPage} />} />
             </Routes>
