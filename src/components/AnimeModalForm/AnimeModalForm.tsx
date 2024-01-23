@@ -69,7 +69,7 @@ export const AnimeModalForm: React.FC<Props> = ({
         aria-label='Status'
         disabled={!editable}
         defaultValue={status}
-        onChange={(e) => onChange(e.target.value, 'status')}
+        onChange={(e) => onChange(e.currentTarget.value, 'status')}
       >
         {Object.keys(Status).map((stat: string) => (
           <option key={stat} value={stat}>{Status[stat as keyof typeof Status]}</option>
@@ -82,7 +82,7 @@ export const AnimeModalForm: React.FC<Props> = ({
         aria-label='Score'
         disabled={!editable}
         defaultValue={score}
-        onChange={(e) => onChange(e.target.value, 'score')}
+        onChange={(e) => onChange(e.currentTarget.value, 'score')}
       >
         {Object.keys(Score).reverse().map((sc: string) => (
           <option key={sc} value={sc}>{Score[sc as keyof typeof Score]}</option>
@@ -134,7 +134,8 @@ export const AnimeModalForm: React.FC<Props> = ({
         style={{ paddingTop: '7px' }}
         type='switch'
         defaultChecked={isPublic}
-        onChange={(e) => onChange(e.target.checked, 'isPublic')}
+        checked={isPublic}
+        onChange={(e) => onChange(e.currentTarget.checked, 'isPublic')}
       />
     </Form.Group>
   </Form>);

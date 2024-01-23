@@ -133,6 +133,7 @@ export const AnimeListItem: React.FC<Props> = ({
                   style={{ paddingTop: '7px' }}
                   type='switch'
                   defaultChecked={isPublic}
+                  checked={isPublic}
                   onChange={(e) => onChange(e.currentTarget.checked, 'isPublic')}
                 />
               </Form.Group>
@@ -217,6 +218,7 @@ export const AnimeListItem: React.FC<Props> = ({
           score={score}
           status={status}
           link={link}
+          isPublic={isPublic}
           {...rest}
         />
       </ListGroupItem>
