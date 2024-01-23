@@ -21,6 +21,7 @@ export const Toggle: React.FC<Props> = ({ theme, toggleTheme }) => {
         onClick={toggleTheme}
         className='float-right'
         label={isLight ? '☀' : '🌙'}
+        defaultChecked={isLight}
       />
     </OverlayTrigger>
   );

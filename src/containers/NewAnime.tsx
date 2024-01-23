@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 import { debounce } from 'lodash';
+import { setDoc, doc } from 'firebase/firestore';
 
-import firebase from '../firebase/firebase';
+import { db } from '../firebase';
 import { NewAnimeForm } from '../components';
 import { AnimeModel } from '../models';
-import UserContext from '../hooks/UserContext';
+import { UserContext } from '../hooks/UserContext';
 import { searchAsync } from '../services/anime.service';
 
 export const NewAnime: React.FC = () => {
   const { user } = React.useContext(UserContext);
-  const [externalAnime, setExternalAnime] = useState<AnimeModel>(null);
+  const [externalAnime, setExternalAnime] = useState<AnimeModel | null>(null);
 
   const handleSubmit = (anime: AnimeModel) => {
     setExternalAnime(null);
-
-    firebase
-      .firestore()
-      .collection('animes')
-      .add({
-        uid: user.uid,
+      setDoc(doc(db, 'animes'), {
+        uid: user?.uid,
         status: 'PlanToWatch',
         types: [],
         ...anime
@@ -26,8 +23,8 @@ export const NewAnime: React.FC = () => {
   };
 
   const handleSearch = async (search: string) => {
-    const d = await searchAsync(search);
-    setExternalAnime(d);
+    const data = await searchAsync(search);
+    setExternalAnime(data);
   };
 
   const debouncedHandleSearch = debounce(handleSearch, 300);

@@ -11,16 +11,16 @@ export const useDarkMode = () => {
   const toggleTheme = () => {
     if (theme === 'light') {
       setMode('dark');
-      document.body.classList.add('bootstrap-dark');
+      document.documentElement.setAttribute('data-bs-theme', 'dark');
     } else {
       setMode('light');
-      document.body.classList.remove('bootstrap-dark');
+      document.documentElement.setAttribute('data-bs-theme', 'light');
     }
   };
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem('theme');
-    
+
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark').matches && !localTheme) setMode('dark');
     else if (localTheme) setTheme(localTheme);
     else setMode('light');
@@ -30,9 +30,9 @@ export const useDarkMode = () => {
 
   useEffect(() => {
     if (theme === 'dark') {
-      document.body.classList.add('bootstrap-dark');
+      document.documentElement.setAttribute('data-bs-theme', 'dark');
     } else {
-      document.body.classList.remove('bootstrap-dark');
+      document.documentElement.setAttribute('data-bs-theme', 'light');
     }
   }, [theme]);
 

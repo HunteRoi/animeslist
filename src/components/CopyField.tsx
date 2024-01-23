@@ -6,11 +6,9 @@ type Props = {
   setCopyFullList: (value: boolean) => void;
 };
 
-const CopyField: React.FC<Props> = ({ copy, setCopyFullList }) => (
-  <>
-    <Button variant='secondary' onClick={copy} size='sm'>COPY LIST</Button>
-    <Form.Check inline id='copyFullListSwitch' className='ml-3' label='Copy full list' type='switch' onChange={(e: any)=> setCopyFullList(e.currentTarget.checked)}></Form.Check>
-  </>
+export const CopyField: React.FC<Props> = ({ copy, setCopyFullList }) => (
+  <div style={{ display: 'flex', flexDirection: 'row', gap: '1em' }}>
+    <Button variant='secondary' onClick={copy} size='sm'>Copy list</Button>
+    <Form.Check inline id='copyFullListSwitch' className='me-3' label='Copy full list' type='switch' onChange={e => setCopyFullList(e.currentTarget.checked)}></Form.Check>
+  </div>
 );
-
-export default CopyField;

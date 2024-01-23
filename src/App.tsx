@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { User } from 'firebase/auth';
 
-import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap-dark.css';
-import '@forevolve/bootstrap-dark/dist/css/toggle-bootstrap.css';
-
-import { auth, signIn, signOut } from './firebase/auth';
+import { auth, signIn, signOut } from './firebase';
 import { Loading, Header, Footer } from './components';
-import { PrivateRoute, PublicRoute } from './containers';
 import { Homepage, PublicAnimesList, LandingPage } from './pages';
-import UserContext from './hooks/UserContext';
-import { version } from '../package.json';
+import { UserContext } from './hooks/UserContext';
+import packageInfo from '../package.json';
 
-const App: React.FC = () => {
+const { version } = packageInfo;
+
+export const App: React.FC = () => {
   const [user, setUser] = useState(() => auth.currentUser);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user: firebase.User) => {
+    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
       if (user) {
         setUser(user);
       } else {
@@ -32,7 +31,7 @@ const App: React.FC = () => {
     return unsubscribe;
   }, [loading]);
 
-  if (loading) return <Loading />
+  if (loading) return <Loading />;
 
   return (
     <UserContext.Provider value={{ user }}>
@@ -41,21 +40,11 @@ const App: React.FC = () => {
           <Header user={user} signIn={signIn} signOut={signOut} />
 
           <main className='main mb-4 text-center'>
-            <Switch>
-              <Route path='/users/:userid' component={PublicAnimesList} />
-              <PublicRoute
-                authenticated={user !== null}
-                path='/'
-                component={LandingPage}
-                exact
-              />
-              <PrivateRoute
-                authenticated={user !== null}
-                path='/home'
-                component={Homepage}
-                exact
-              />
-            </Switch>
+            <Routes>
+              <Route path='/users/:userid' element={<PublicRoute authenticated={false} component={PublicAnimesList} />} />
+              <Route path='/home' element={<PrivateRoute authenticated={user !== null} component={Homepage} />} />
+              <Route path='/*' element={<PublicRoute authenticated={user !== null} component={LandingPage} />} />
+            </Routes>
           </main>
 
           <Footer />
@@ -66,4 +55,11 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+type AuthRouteProps = {
+  authenticated : boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  component: any;
+};
+
+const PrivateRoute: React.FC<AuthRouteProps> = ({ authenticated, component: Component }) => authenticated ? <Component /> : <Navigate to='/' />;
+const PublicRoute: React.FC<AuthRouteProps> = ({ authenticated, component: Component }) => !authenticated ? <Component /> : <Navigate to='/home' />;

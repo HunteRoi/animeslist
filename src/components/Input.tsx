@@ -45,9 +45,7 @@ export const Input: FC<InputProps> = ({
       {prepend && !label
       ? (
         <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text>{prepend}</InputGroup.Text>
-          </InputGroup.Prepend>
+          <InputGroup.Text>{prepend}</InputGroup.Text>
           {formControl}
         </InputGroup>
       )

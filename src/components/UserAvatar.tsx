@@ -1,8 +1,9 @@
+import { User } from 'firebase/auth';
 import React, { useEffect, useRef, useState } from 'react';
 import { Overlay, Tooltip } from 'react-bootstrap';
 
 type Props = {
-  user: firebase.User;
+  user: User;
 };
 
 export const UserAvatar: React.FC<Props> = ({ user }) => {
@@ -18,7 +19,7 @@ export const UserAvatar: React.FC<Props> = ({ user }) => {
   return (
     <>
       <div ref={target} onMouseOver={() => setShow(!show)}>
-        <img src={user.photoURL} className='profile-image' alt='avatar' />
+        <img src={user.photoURL ?? ''} className='profile-image' alt='avatar' />
         <span className='profile-text'>{user.displayName}</span>
       </div>
         

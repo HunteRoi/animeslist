@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { ListGroup, Form } from 'react-bootstrap';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { AnimeModel } from '../models';
 import { Anime } from '../containers';
-import { AnimeListItem } from './AnimeListItem';
+import { AnimeListItem } from './AnimeListItem/AnimeListItem';
 import { Loading } from './Loading';
 import { sortBy } from '../helpers';
 import { SearchField } from './SearchField';
-import FilterForm from './FilterForm';
+import { FilterForm } from './FilterForm';
+import { Scroll } from './Scroll';
 
 export type AnimeListProps = {
   animes: Array<AnimeModel>;
@@ -60,7 +60,7 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes, editable }) => {
 
       <ListGroup
         variant='flush'
-        as={InfiniteScroll}
+        as={Scroll}
         next={fetchMore}
         hasMore={pageNumber < maxPageNumber}
         loader={<Loading />}
