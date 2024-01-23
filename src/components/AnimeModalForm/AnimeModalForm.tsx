@@ -133,7 +133,6 @@ export const AnimeModalForm: React.FC<Props> = ({
         disabled={!editable}
         style={{ paddingTop: '7px' }}
         type='switch'
-        defaultChecked={isPublic}
         checked={isPublic}
         onChange={(e) => onChange(e.currentTarget.checked, 'isPublic')}
       />
