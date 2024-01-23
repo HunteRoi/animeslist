@@ -25,7 +25,7 @@ export const PublicAnimes: React.FC<Props> = ({ component, userid }) => {
           const payload = { id: change.doc.id, ...change.doc.data() } as AnimeModel;
           dispatch({ type: change.type, payload });
         });
-    });     
+    });
 
     return unsubscribe;
   }, [userid]);
