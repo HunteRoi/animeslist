@@ -25,6 +25,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.19.1",
 		"@typescript-eslint/parser": "^6.19.1",
 		"eslint": "^8.56.0",
+		"firebase-tools": "^13.0.3",
 		"typescript": "^5.3.3"
 	},
 	"engines": {
@@ -34,7 +35,7 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"deploy": "react-scripts build & firebase deploy",
-		"lint": "eslint ./src --ext .tsx .ts -e \"node_modules\""
+		"lint": "eslint ./src"
 	},
 	"eslintConfig": {
 		"extends": [
