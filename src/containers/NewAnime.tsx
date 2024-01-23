@@ -23,8 +23,8 @@ export const NewAnime: React.FC = () => {
   };
 
   const handleSearch = async (search: string) => {
-    const d = await searchAsync(search);
-    setExternalAnime(d);
+    const data = await searchAsync(search);
+    setExternalAnime(data);
   };
 
   const debouncedHandleSearch = debounce(handleSearch, 300);
