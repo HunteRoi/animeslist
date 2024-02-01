@@ -56,7 +56,7 @@ export const AnimeList: React.FC<AnimeListProps> = ({ animes, editable }) => {
   return (
     <>
       <FilterForm setCopyFullList={setCopyFullList} copyListToClipboard={copyListToClipboard} setStatusFilter={setStatusFilter} />
-      <SearchField setValue={setFilter} />
+      <SearchField className='sticky-top' setValue={setFilter} />
 
       <ListGroup
         variant='flush'
