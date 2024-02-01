@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { debounce } from 'lodash';
-import { setDoc, doc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 import { db } from '../firebase';
 import { NewAnimeForm } from '../components';
@@ -14,12 +14,12 @@ export const NewAnime: React.FC = () => {
 
   const handleSubmit = (anime: AnimeModel) => {
     setExternalAnime(null);
-      setDoc(doc(db, 'animes'), {
-        uid: user?.uid,
-        status: 'PlanToWatch',
-        types: [],
-        ...anime
-      });
+    addDoc(collection(db, 'animes'), {
+      uid: user?.uid,
+      status: 'PlanToWatch',
+      types: [],
+      ...anime
+    });
   };
 
   const handleSearch = async (search: string) => {
